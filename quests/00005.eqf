@@ -182,7 +182,7 @@ state FindMap_Entry
 	action		SetMap( 228 ,13 , 53 )
 	rule		Always() goto FindMap
 
-			// extra stuck protection on the first one - not really needed!
+	// extra stuck protection on the first one - not really needed!
 	action		AddNpcText( 6 , "Aye you got stuck?" )
 	rule 		TalkedToNpc( 6 ) goto Escape
 }

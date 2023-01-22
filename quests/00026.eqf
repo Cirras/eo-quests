@@ -158,8 +158,6 @@ state Test6_3
 	rule		GotItems( 477 , 100 ) goto Test7_2
 }
 
-
-
 state Test7
 {
 	desc		"Find tenba bags"

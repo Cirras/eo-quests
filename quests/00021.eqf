@@ -9,9 +9,9 @@ Main
 
 state Begin
 {
-	desc		"Talk to the young pirate"
-	action		AddNpcText( 21 , "Arrr, I discovered a new issssland!" );
-	action		AddNpcChat( 21 , "Arrr, I discovered a new issssland!" );
+	desc  		"Talk to the young pirate"
+	action  	AddNpcText( 21 , "Arrr, I discovered a new issssland!" );
+	action  	AddNpcChat( 21 , "Arrr, I discovered a new issssland!" );
 	action		AddNpcInput( 21 , 1 , "Not intrested");
 	action		AddNpcInput( 21 , 2 , "Tell me more..");
 	action		AddNpcInput( 21 , 3 , "Dont believe you");
@@ -50,434 +50,434 @@ state Begin1
 	action		AddNpcText( 21 , "Ha-ha-ha.. Dont make me laugh now, you are no pirate, you dont look like a pirate at all.." );
 	action		AddNpcText( 21 , "Go talk to the pirate captain, he will teach you how to become a real pirate!" );
 
-   	action      	AddNpcText( 6 , "So, arhh pirate test?!.. You want to become a real pirate and take the pirate test, arhhhhhh har har har.. *gulp*" ); 
-   	action      	AddNpcText( 6 , "Okay then.. if you can defeat 3 of my elite crew members Ill consider it"); 
+   	action      AddNpcText( 6 , "So, arhh pirate test?!.. You want to become a real pirate and take the pirate test, arhhhhhh har har har.. *gulp*" ); 
+   	action      AddNpcText( 6 , "Okay then.. if you can defeat 3 of my elite crew members Ill consider it"); 
 
-   	action      	AddNpcInput( 6 , 1 , "Maybe piracy is not for me."); 
-   	action      	AddNpcInput( 6 , 2 , "Fear me, crew members!");
+   	action      AddNpcInput( 6 , 1 , "Maybe piracy is not for me."); 
+   	action      AddNpcInput( 6 , 2 , "Fear me, crew members!");
 
    	rule      	InputNpc( 1 ) goto Lose 
-  	 rule       	InputNpc( 2 ) goto Killcrew
+  	rule 		InputNpc( 2 ) goto Killcrew
 }
 
 
 state Killcrew
 { 
    	desc      	"Defeat 3 pirate crew members"
-   	action      	ShowHint("Show them whos the boss!"); 
-   	action      	AddNpcText( 6 , "Okay what are you waiting for? get off my boat and defeat three elites of my crew."); 
+   	action      ShowHint("Show them whos the boss!"); 
+   	action      AddNpcText( 6 , "Okay what are you waiting for? get off my boat and defeat three elites of my crew."); 
 	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
 
 
-   	rule      	KilledNpcs( 128 , 3 ) goto Donecrew
+   	rule 		KilledNpcs( 128 , 3 ) goto Donecrew
 } 
 
 state Donecrew
 { 
-   	desc      		"Talk the Pirate Captain again" 
-   	action      		ShowHint("Talk to Pirate Captain!"); 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Yeah yeah, my crew members are weak anyways..." ); 
-   	action      		AddNpcText( 6 , "but that doesnt make you a pirate, in fact"); 
-   	action      		AddNpcChat( 6 , "you will never become one.. Har Har Har"); 
+   	desc      	"Talk the Pirate Captain again" 
+   	action      ShowHint("Talk to Pirate Captain!"); 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Yeah yeah, my crew members are weak anyways..." ); 
+   	action      AddNpcText( 6 , "but that doesnt make you a pirate, in fact"); 
+   	action      AddNpcChat( 6 , "you will never become one.. Har Har Har"); 
 
-   	action      		AddNpcInput( 6 , 1 , "I know about a treasure.."); 
-   	action      		AddNpcInput( 6 , 2 , "Ill report you for software piracy."); 
-   	action      		AddNpcInput( 6 , 3 , "Ok, I drink all this fairy soda myself."); 
+   	action      AddNpcInput( 6 , 1 , "I know about a treasure.."); 
+   	action      AddNpcInput( 6 , 2 , "Ill report you for software piracy."); 
+   	action      AddNpcInput( 6 , 3 , "Ok, I drink all this fairy soda myself."); 
 
-   	rule       		InputNpc( 1 ) goto Anstreasure 
-   	rule       		InputNpc( 2 ) goto Anssoft
-   	rule       		InputNpc( 3 ) goto Anssoda
+   	rule       	InputNpc( 1 ) goto Anstreasure 
+   	rule       	InputNpc( 2 ) goto Anssoft
+   	rule       	InputNpc( 3 ) goto Anssoda
 
 } 
 
 state Anstreasure
 { 
-   	desc      		"Talk to Pirate Captain again" 
-   	action      		ShowHint("We hope he doesnt find out you dont know about a treasure."); 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Huh? err.. you mean the Legendary Monkey Island Treasure?" ); 
+   	desc      	"Talk to Pirate Captain again" 
+   	action      ShowHint("We hope he doesnt find out you dont know about a treasure."); 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Huh? err.. you mean the Legendary Monkey Island Treasure?" ); 
 
-   	action      		AddNpcInput( 6 , 1 , "Monkey Islad trea?"); 
-   	action      		AddNpcInput( 6 , 2 , "Ya, that treasure"); 
+   	action      AddNpcInput( 6 , 1 , "Monkey Islad trea?"); 
+   	action      AddNpcInput( 6 , 2 , "Ya, that treasure"); 
 
-   	rule       		InputNpc( 1 ) goto Piratetest
-   	rule       		InputNpc( 2 ) goto Piratetest
+   	rule       	InputNpc( 1 ) goto Piratetest
+   	rule       	InputNpc( 2 ) goto Piratetest
 
 } 
 
 state Anssoft
 { 
-   	desc      		"Talk to Pirate Captain again" 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "What! Er.. I was kidding, cant you take a joke?" ); 
-   	action      		AddNpcChat( 6 , "Of course im going to let you take my brave pirate test" ); 
+   	desc      	"Talk to Pirate Captain again" 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "What! Er.. I was kidding, cant you take a joke?" ); 
+   	action      AddNpcChat( 6 , "Of course im going to let you take my brave pirate test" ); 
 
-   	action      		AddNpcInput( 6 , 1 , "Sure, pal"); 
-   	action      		AddNpcInput( 6 , 2 , "Im not good at math"); 
+   	action      AddNpcInput( 6 , 1 , "Sure, pal"); 
+   	action      AddNpcInput( 6 , 2 , "Im not good at math"); 
 
-   	rule       		InputNpc( 1 ) goto Piratetest
-   	rule       		InputNpc( 2 ) goto Piratetest
+   	rule 		InputNpc( 1 ) goto Piratetest
+   	rule 		InputNpc( 2 ) goto Piratetest
 } 
 
 state Anssoda
 { 
-   	desc      		"Talk to Pirate Captain again" 
-   	action     		 ShowHint("Cheers!"); 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Huh? You said.. fairy soda?" ); 
-   	action      		AddNpcChat( 6 , "Allright maybe youre a good pirate after all" ); 
+   	desc  		"Talk to Pirate Captain again" 
+   	action     	ShowHint("Cheers!"); 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action     	AddNpcText( 6 , "Huh? You said.. fairy soda?" ); 
+   	action      AddNpcChat( 6 , "Allright maybe youre a good pirate after all" ); 
 
-   	action      		AddNpcInput( 6 , 1 , "He, lets drink matey!"); 
-   	action      		AddNpcInput( 6 , 2 , "Tell me about the test.."); 
+   	action     	AddNpcInput( 6 , 1 , "He, lets drink matey!"); 
+   	action      AddNpcInput( 6 , 2 , "Tell me about the test.."); 
 
-   	rule       		InputNpc( 1 ) goto Piratetest
-   	rule       		InputNpc( 2 ) goto Piratetest
+   	rule 		InputNpc( 1 ) goto Piratetest
+   	rule 		InputNpc( 2 ) goto Piratetest
 } 
 
 state Piratetest
 { 
-   	desc      		"Talk with Pirate Captain" 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Oh well, lets begin the test then.. this is really easy" ); 
-   	action      		AddNpcText( 6 , "at least for us, the real pirates, Har Har Har" );
+   	desc  		"Talk with Pirate Captain" 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Oh well, lets begin the test then.. this is really easy" ); 
+   	action      AddNpcText( 6 , "at least for us, the real pirates, Har Har Har" );
 
-   	action      		AddNpcInput( 6 , 1 , "I want to prove my fighting skills");
-   	action      		AddNpcInput( 6 , 2 , "Lets go treasure hunting!");
-   	action      		AddNpcInput( 6 , 2 , "Im good at getting information");
+   	action      AddNpcInput( 6 , 1 , "I want to prove my fighting skills");
+   	action      AddNpcInput( 6 , 2 , "Lets go treasure hunting!");
+   	action      AddNpcInput( 6 , 2 , "Im good at getting information");
 
-   	rule       		InputNpc( 1 ) goto Fightquest
-   	rule       		InputNpc( 2 ) goto Nottreasure
-   	rule       		InputNpc( 3 ) goto Infoquest
+   	rule       	InputNpc( 1 ) goto Fightquest
+   	rule       	InputNpc( 2 ) goto Nottreasure
+   	rule       	InputNpc( 3 ) goto Infoquest
 } 
 
 state Nottreasure
 { 
-   	desc      		"Talk to Pirate Captain" 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Dont be silly, you cant go treasure hunting without proving your strenght and abilities" ); 
+   	desc      	"Talk to Pirate Captain" 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Dont be silly, you cant go treasure hunting without proving your strenght and abilities" ); 
 
-   	action      		AddNpcInput( 6 , 1 , "Ill show you im strong!"); 
-   	action      		AddNpcInput( 6 , 2 , "Im the smartest pirate in the world!"); 
+   	action      AddNpcInput( 6 , 1 , "Ill show you im strong!"); 
+   	action      AddNpcInput( 6 , 2 , "Im the smartest pirate in the world!"); 
 
-   	rule       		InputNpc( 1 ) goto Fightquest
-   	rule       		InputNpc( 2 ) goto Infoquest
+   	rule       	InputNpc( 1 ) goto Fightquest
+   	rule       	InputNpc( 2 ) goto Infoquest
 } 
 
 state Fightquest 
 { 
-   	desc      		"Defeat the inspection guard" 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-	action      		AddNpcText( 6 , "Ok then.. Kill that annoying inspection guard standing before my boat. He is making me nervous like fox." );
-   	action      		AddNpcText( 6 , "Good luck killing that rookie guard, har har" );
-   	action      		AddNpcInput( 6 , 1 , "Isnt there another way to prove it?"); 
-	action      		AddNpcInput( 6 , 2 , "Okay, i got it.");
+   	desc      	"Defeat the inspection guard" 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+	action      AddNpcText( 6 , "Ok then.. Kill that annoying inspection guard standing before my boat. He is making me nervous like fox." );
+   	action      AddNpcText( 6 , "Good luck killing that rookie guard, har har" );
+   	action      AddNpcInput( 6 , 1 , "Isnt there another way to prove it?"); 
+	action      AddNpcInput( 6 , 2 , "Okay, i got it.");
 
-   	rule       		KilledNpcs(  285 , 1 ) goto NextTest
-   	rule       		InputNpc( 1 ) goto Infoquest
+   	rule       	KilledNpcs(  285 , 1 ) goto NextTest
+   	rule       	InputNpc( 1 ) goto Infoquest
 } 
 
 state Infoquest 
 { 
-   	desc      		"Go to Atlantis and find its secret" 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Listen, the legend about the monkey island claims that a long time ago, when villagers from Atlantis became aware.." );
-   	action      		AddNpcText( 6 , "that their city was going to sink, and they burried some of their major treasures at monkey island." );
-   	action      		AddNpcText( 6 , "Maybe they wrote something about it somewhere." );
-   	action      		AddNpcText( 6 , "Good luck finding the secret of atlantis." );
-   	action      		AddNpcInput( 6 , 1 , "Isnt there another way to prove it?"); 
-	action      		AddNpcInput( 6 , 2 , "Okay, i got it.");
+   	desc      	"Go to Atlantis and find its secret" 
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Listen, the legend about the monkey island claims that a long time ago, when villagers from Atlantis became aware.." );
+   	action      AddNpcText( 6 , "that their city was going to sink, and they burried some of their major treasures at monkey island." );
+   	action      AddNpcText( 6 , "Maybe they wrote something about it somewhere." );
+   	action      AddNpcText( 6 , "Good luck finding the secret of atlantis." );
+   	action      AddNpcInput( 6 , 1 , "Isnt there another way to prove it?"); 
+	action      AddNpcInput( 6 , 2 , "Okay, i got it.");
 
-   	rule       		EnterCoord( 251 , 8 , 33) goto NextTest
-   	rule       		InputNpc( 1 ) goto Fightquest
+   	rule 		EnterCoord( 251 , 8 , 33) goto NextTest
+   	rule       	InputNpc( 1 ) goto Fightquest
 } 
 
 state NextTest
 { 
-   	desc      		"Talk to pirate captain" 
-	action			PlaySound(18)
-	action			ShowHint("The pirate captain wants to talk to you!");
+   	desc      	"Talk to pirate captain" 
+	action		PlaySound(18)
+	action		ShowHint("The pirate captain wants to talk to you!");
 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Looks like you have some skills son! too bad you are not a real pirate yet.." );
-   	action      		AddNpcText( 6 , "Look these rats in the port are really a problem. At night they make a terrible noise and i just cant sleep, uhrr" );
-	rule			TalkedToNpc( 6 ) goto RatTest
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Looks like you have some skills son! too bad you are not a real pirate yet.." );
+   	action      AddNpcText( 6 , "Look these rats in the port are really a problem. At night they make a terrible noise and i just cant sleep, uhrr" );
+	rule		TalkedToNpc( 6 ) goto RatTest
 }
 
 state RatTest
 { 
-   	desc      		"Kill 30 rats in aevens port" 
+   	desc      	"Kill 30 rats in aevens port" 
 
-	action			AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
-   	action      		AddNpcText( 6 , "Go kill 30 rats for me, and you will be a real pirate.. whatever" );
-   	rule       		KilledNpcs(  2 , 30 ) goto RatTest2
+	action		AddNpcText( 21 , "Nawh, i will only share this pirate secret with REAL PIRATES." );
+   	action      AddNpcText( 6 , "Go kill 30 rats for me, and you will be a real pirate.. whatever" );
+   	rule       	KilledNpcs(  2 , 30 ) goto RatTest2
 }
 
 state RatTest2
 {
-   	desc      		"Talk to the young pirate" 
-   	action      		AddNpcText( 6 , "Hmm.. ow its you, yaya your a real pirate now, now leave me alone." );
-	action			AddNpcText( 21 , "Hmm so the captain has declared you a real pirate, i cant believe it.." );
-	action			AddNpcText( 21 , "But ok if you can answer this simple PIRATE test, i believe you." );
-	rule			TalkedToNpc( 21 ) goto Quiz1
+   	desc      	"Talk to the young pirate" 
+   	action      AddNpcText( 6 , "Hmm.. ow its you, yaya your a real pirate now, now leave me alone." );
+	action		AddNpcText( 21 , "Hmm so the captain has declared you a real pirate, i cant believe it.." );
+	action		AddNpcText( 21 , "But ok if you can answer this simple PIRATE test, i believe you." );
+	rule		TalkedToNpc( 21 ) goto Quiz1
 }
 
 state Quiz1
 {
-   	desc      		"Talk to the young pirate" 
-	action			AddNpcText( 21 , "Whats the  special 'nickname' of our skull&bone flag?" );
+   	desc      	"Talk to the young pirate" 
+	action		AddNpcText( 21 , "Whats the  special 'nickname' of our skull&bone flag?" );
 
-   	action      		AddNpcInput( 21 , 1 , "Jolly Roger"); 
-   	action      		AddNpcInput( 21 , 2 , "Dodger Deadly"); 
-   	action      		AddNpcInput( 21 , 3 , "Black Skull"); 
+   	action      AddNpcInput( 21 , 1 , "Jolly Roger"); 
+   	action      AddNpcInput( 21 , 2 , "Dodger Deadly"); 
+   	action      AddNpcInput( 21 , 3 , "Black Skull"); 
 
-   	rule       		InputNpc( 1 ) goto Quiz2
-   	rule       		InputNpc( 2 ) goto QuizLose1
-   	rule       		InputNpc( 3 ) goto QuizLose1
+   	rule       	InputNpc( 1 ) goto Quiz2
+   	rule       	InputNpc( 2 ) goto QuizLose1
+   	rule       	InputNpc( 3 ) goto QuizLose1
 
 }
 
 state Quiz2
 {
-   	desc      		"Talk to the young pirate" 
-	action			AddNpcText( 21 , "Pirates always share their looted treasures equally, except for captain, the pilot, the carpenter and our cook." );
-	action			AddNpcText( 21 , "How much more do they receive?");
+   	desc      	"Talk to the young pirate" 
+	action		AddNpcText( 21 , "Pirates always share their looted treasures equally, except for captain, the pilot, the carpenter and our cook." );
+	action		AddNpcText( 21 , "How much more do they receive?");
 
-   	action      		AddNpcInput( 21 , 1 , "half of the entire treasure"); 
-   	action      		AddNpcInput( 21 , 2 , "a double share"); 
-   	action      		AddNpcInput( 21 , 3 , "a tripple share"); 
+   	action      AddNpcInput( 21 , 1 , "half of the entire treasure"); 
+   	action      AddNpcInput( 21 , 2 , "a double share"); 
+   	action      AddNpcInput( 21 , 3 , "a tripple share"); 
 
-   	rule       		InputNpc( 1 ) goto QuizLose2
-   	rule       		InputNpc( 2 ) goto Quiz3
-   	rule       		InputNpc( 3 ) goto QuizLose2
+   	rule       	InputNpc( 1 ) goto QuizLose2
+   	rule       	InputNpc( 2 ) goto Quiz3
+   	rule       	InputNpc( 3 ) goto QuizLose2
 
 }
 
 state Quiz3
 {
-   	desc      		"Talk to the young pirate" 
-	action			AddNpcText( 21 , "Is the captain’s cabin always open for anyone to use?" );
+   	desc      	"Talk to the young pirate" 
+	action		AddNpcText( 21 , "Is the captain’s cabin always open for anyone to use?" );
 
-   	action      		AddNpcInput( 21 , 1 , "Yes, always open"); 
-   	action      		AddNpcInput( 21 , 2 , "No, its private"); 
+   	action      AddNpcInput( 21 , 1 , "Yes, always open"); 
+   	action      AddNpcInput( 21 , 2 , "No, its private"); 
 
-   	rule       		InputNpc( 1 ) goto ReadyToGo
-   	rule       		InputNpc( 2 ) goto QuizLose3
+   	rule       	InputNpc( 1 ) goto ReadyToGo
+   	rule       	InputNpc( 2 ) goto QuizLose3
 
 }
 
 state ReadyToGo
 {
-   	desc      		"Talk to the young pirate" 
-	action			AddNpcText( 21 , "Hmm.. okay you proved to be a pirate, maybe not.. Lets just sail to that island now. The captain doesnt beleive me and i been anxious to tell anyone ever since.." );
-	action			AddNpcText( 21 , "Do you want to sail to monkey island?" );
+   	desc      	"Talk to the young pirate" 
+	action		AddNpcText( 21 , "Hmm.. okay you proved to be a pirate, maybe not.. Lets just sail to that island now. The captain doesnt beleive me and i been anxious to tell anyone ever since.." );
+	action		AddNpcText( 21 , "Do you want to sail to monkey island?" );
 
-   	action      		AddNpcInput( 21 , 1 , "Yes, let go"); 
-   	action      		AddNpcInput( 21 , 2 , "No, maybe later"); 
+   	action      AddNpcInput( 21 , 1 , "Yes, let go"); 
+   	action     	AddNpcInput( 21 , 2 , "No, maybe later"); 
 
-   	rule       		InputNpc( 1 ) goto GoIsland
+   	rule       	InputNpc( 1 ) goto GoIsland
 }
 
 state GoIsland
 {
-   	desc      		"Find the shipwreck hut" 
-	action			SetMap( 271 ,25 , 54 )
+   	desc      	"Find the shipwreck hut" 
+	action		SetMap( 271 ,25 , 54 )
 
 	// escape sequence
 
-	action			AddNpcText( 21 , "Do you want to sail to monkey island?" );
-   	action      		AddNpcInput( 21 , 1 , "Yes, let go"); 
-   	action      		AddNpcInput( 21 , 2 , "No, maybe later"); 
+	action		AddNpcText( 21 , "Do you want to sail to monkey island?" );
+   	action      AddNpcInput( 21 , 1 , "Yes, let go"); 
+   	action      AddNpcInput( 21 , 2 , "No, maybe later"); 
 
 	// lost pirate
 
-	action			AddNpcText( 22 , "A treasure huh?.. Ya , i been looking for it for years.." );
-	rule			TalkedToNpc( 22 ) goto SolveRiddle
+	action		AddNpcText( 22 , "A treasure huh?.. Ya , i been looking for it for years.." );
+	rule		TalkedToNpc( 22 ) goto SolveRiddle
 
 	// continue quest part
 	
-   	rule       		InputNpc( 1 ) goto GoIsland
+   	rule       	InputNpc( 1 ) goto GoIsland
 }
 
 state SolveRiddle
 {
-   	desc      		"Find 10 baby turtle meat." 
+   	desc      	"Find 10 baby turtle meat." 
 
 	// escape sequence
 
-	action			AddNpcText( 21 , "Do you want to sail to monkey island?" );
-   	action      		AddNpcInput( 21 , 1 , "Yes, let go"); 
-   	action      		AddNpcInput( 21 , 2 , "No, maybe later")
+	action		AddNpcText( 21 , "Do you want to sail to monkey island?" );
+   	action      AddNpcInput( 21 , 1 , "Yes, let go"); 
+   	action      AddNpcInput( 21 , 2 , "No, maybe later")
 
 	// lost pirate
 
-	action			AddNpcText( 22 , "Sorry i cant tell you more about the reasure, you see.. i havent ate anything since weeks.." );
-	action			AddNpcText( 22 , "Now if you could bring me some baby turtle meat, i would be willing to share this secret.." );
+	action		AddNpcText( 22 , "Sorry i cant tell you more about the reasure, you see.. i havent ate anything since weeks.." );
+	action		AddNpcText( 22 , "Now if you could bring me some baby turtle meat, i would be willing to share this secret.." );
 
 	// continue quest part
 	
-   	rule       		InputNpc( 1 ) goto GoIsland
-	rule			GotItems( 489 , 10 ) goto GotTheFish
+   	rule       	InputNpc( 1 ) goto GoIsland
+	rule		GotItems( 489 , 10 ) goto GotTheFish
 }
 
 state GotTheFish
 {
-   	desc      		"Give turtle meat to lost pirate" 
+   	desc      	"Give turtle meat to lost pirate" 
 
 	// escape sequence
 
-	action			AddNpcText( 21 , "Do you want to sail to monkey island?" );
-   	action      		AddNpcInput( 21 , 1 , "Yes, let go"); 
-   	action      		AddNpcInput( 21 , 2 , "No, maybe later")
+	action		AddNpcText( 21 , "Do you want to sail to monkey island?" );
+   	action      AddNpcInput( 21 , 1 , "Yes, let go"); 
+   	action      AddNpcInput( 21 , 2 , "No, maybe later")
 
-	action			AddNpcText( 22 , "I can see you have the 10 baby turtle meat i asked for, would you be willing to give them to me?" );
-	action			AddNpcInput( 22 , 3 , "Ok, here you are.");
-	action			AddNpcInput( 22 , 4 , "No, sorry no fishy.");
+	action		AddNpcText( 22 , "I can see you have the 10 baby turtle meat i asked for, would you be willing to give them to me?" );
+	action		AddNpcInput( 22 , 3 , "Ok, here you are.");
+	action		AddNpcInput( 22 , 4 , "No, sorry no fishy.");
 
 	// continue quest part
 	
-   	rule       		InputNpc( 1 ) goto GoIsland
-	rule 			InputNpc( 3 ) goto SolveRiddle2
-	rule			LostItems( 489 , 10 ) goto SolveRiddle
+   	rule       	InputNpc( 1 ) goto GoIsland
+	rule 		InputNpc( 3 ) goto SolveRiddle2
+	rule		LostItems( 489 , 10 ) goto SolveRiddle
 }
 
 state SolveRiddle2
 {
-   	desc      		"Talk to the lost pirate" 
-	action			RemoveItem( 475 , 10)		
+   	desc      	"Talk to the lost pirate" 
+	action		RemoveItem( 475 , 10)		
 
 	// escape sequence
 
-	action			AddNpcText( 21 , "Do you want to sail to monkey island?" );
-   	action      		AddNpcInput( 21 , 1 , "Yes, let go"); 
-   	action      		AddNpcInput( 21 , 2 , "No, maybe later")
+	action		AddNpcText( 21 , "Do you want to sail to monkey island?" );
+   	action      AddNpcInput( 21 , 1 , "Yes, let go"); 
+   	action      AddNpcInput( 21 , 2 , "No, maybe later")
 
 	// lost pirate
 
-	action			AddNpcText( 22 , "Ok, the riddle is.." );
-	action			AddNpcText( 22 , "Stand right of the unique pair that carried the roof of the temple.." );
-	action			AddNpcText( 22 , "..The view on the temple is much better 15 steps east from this spot.." );
-	action			AddNpcText( 22 , "..From this point make 12 steps south, then twice as much to the west.." );
-	action			AddNpcText( 22 , "..You should be able to walk 24 steps into a direction other where you came from." );
-	action			AddNpcText( 22 , "Then walk 14 steps to the west for my treasure." );
+	action		AddNpcText( 22 , "Ok, the riddle is.." );
+	action		AddNpcText( 22 , "Stand right of the unique pair that carried the roof of the temple.." );
+	action		AddNpcText( 22 , "..The view on the temple is much better 15 steps east from this spot.." );
+	action		AddNpcText( 22 , "..From this point make 12 steps south, then twice as much to the west.." );
+	action		AddNpcText( 22 , "..You should be able to walk 24 steps into a direction other where you came from." );
+	action		AddNpcText( 22 , "Then walk 14 steps to the west for my treasure." );
 
 	// continue quest part
 	
-   	rule       		InputNpc( 1 ) goto SolveRiddle2b
-	rule			EnterCoord( 271 , 10 , 20) goto TreasureMap
+   	rule       	InputNpc( 1 ) goto SolveRiddle2b
+	rule		EnterCoord( 271 , 10 , 20) goto TreasureMap
 }
 
 state SolveRiddle2b
 {
-   	desc      		"Talk to the lost pirate" 
-	action			SetMap( 271 ,25 , 54 )
+   	desc      	"Talk to the lost pirate" 
+	action		SetMap( 271 ,25 , 54 )
 
 	// escape sequence
 
-	action			AddNpcText( 21 , "Do you want to sail to monkey island?" );
-   	action      		AddNpcInput( 21 , 1 , "Yes, let go"); 
-   	action      		AddNpcInput( 21 , 2 , "No, maybe later")
+	action		AddNpcText( 21 , "Do you want to sail to monkey island?" );
+   	action      AddNpcInput( 21 , 1 , "Yes, let go"); 
+   	action      AddNpcInput( 21 , 2 , "No, maybe later")
 
 	// lost pirate
 
-	action			AddNpcText( 22 , "Ok, the riddle is.." );
-	action			AddNpcText( 22 , "Stand right of the unique pair that carried the roof of the temple.." );
-	action			AddNpcText( 22 , "..The view on the temple is much better 15 steps east from this spot.." );
-	action			AddNpcText( 22 , "..From this point make 12 steps south, then twice as much to the west.." );
-	action			AddNpcText( 22 , "..You should be able to walk 24 steps into a direction other where you came from." );
-	action			AddNpcText( 22 , "Then walk 14 steps to the west for my treasure." );
+	action		AddNpcText( 22 , "Ok, the riddle is.." );
+	action		AddNpcText( 22 , "Stand right of the unique pair that carried the roof of the temple.." );
+	action		AddNpcText( 22 , "..The view on the temple is much better 15 steps east from this spot.." );
+	action		AddNpcText( 22 , "..From this point make 12 steps south, then twice as much to the west.." );
+	action		AddNpcText( 22 , "..You should be able to walk 24 steps into a direction other where you came from." );
+	action		AddNpcText( 22 , "Then walk 14 steps to the west for my treasure." );
 
 	// continue quest part
 	
-   	rule       		InputNpc( 1 ) goto SolveRiddle2b
-	rule			EnterCoord( 271 , 10 , 20) goto TreasureMap
+   	rule       	InputNpc( 1 ) goto SolveRiddle2b
+	rule		EnterCoord( 271 , 10 , 20) goto TreasureMap
 }
 
 state TreasureMap
 {
-   	desc      		"Inspect the treasure chest" 
+   	desc      	"Inspect the treasure chest" 
 
-	action			SetMap( 276 ,4 , 7 )
-	rule			EnterCoord( 276 , 6 , 3) goto TreasureMap2
+	action		SetMap( 276 ,4 , 7 )
+	rule		EnterCoord( 276 , 6 , 3) goto TreasureMap2
 }
 
 
 state TreasureMap2
 {
 
-   	desc      		"Leave the treasure map" 
+   	desc      	"Leave the treasure map" 
 
-	action			GiveItem(1,1600)
-	action			GiveItem(452,1)
-	action			ShowHint("You found 1600 gold pieces and a pirate cap inside the treasure!!");
+	action		GiveItem(1,1600)
+	action		GiveItem(452,1)
+	action		ShowHint("You found 1600 gold pieces and a pirate cap inside the treasure!!");
 
-	rule			EnterCoord( 276 , 3 , 8) goto TreasureMap3
-	rule			EnterCoord( 276 , 4 , 8) goto TreasureMap3
-	rule			EnterCoord( 276 , 5 , 8) goto TreasureMap3
+	rule		EnterCoord( 276 , 3 , 8) goto TreasureMap3
+	rule		EnterCoord( 276 , 4 , 8) goto TreasureMap3
+	rule		EnterCoord( 276 , 5 , 8) goto TreasureMap3
 }
 
 state TreasureMap3
 {
-   	desc      		"Go back to the pirate captain" 
-	action			SetMap( 271 ,20 , 10 )
+   	desc      	"Go back to the pirate captain" 
+	action		SetMap( 271 ,20 , 10 )
 
-	action			AddNpcChat( 21 , "Arrr, You found the treasure. Please go to the captain i believe he wants to speak with you.." );
-   	action      		AddNpcText( 6 , "Arr, so you are a real pirate after all!" ); 
-   	action      		AddNpcText( 6 , "This whole treasure hunt has probably given you a lot of experience, welcome aboard pirate!" ); 
+	action		AddNpcChat( 21 , "Arrr, You found the treasure. Please go to the captain i believe he wants to speak with you.." );
+   	action      AddNpcText( 6 , "Arr, so you are a real pirate after all!" ); 
+   	action      AddNpcText( 6 , "This whole treasure hunt has probably given you a lot of experience, welcome aboard pirate!" ); 
 	
-	rule			TalkedToNpc( 6 ) goto RewardQuest
-	rule			EnterCoord( 276 , 6 , 3) goto FailSafe
+	rule		TalkedToNpc( 6 ) goto RewardQuest
+	rule		EnterCoord( 276 , 6 , 3) goto FailSafe
 }
 
 state FailSafe
 {
-   	desc      		"Leave the treasure map" 
-	action			ShowHint("You can now leave this map..");
+   	desc      	"Leave the treasure map" 
+	action		ShowHint("You can now leave this map..");
 
-	rule			EnterCoord( 276 , 3 , 8) goto TreasureMap3
-	rule			EnterCoord( 276 , 4 , 8) goto TreasureMap3
-	rule			EnterCoord( 276 , 5 , 8) goto TreasureMap3
+	rule		EnterCoord( 276 , 3 , 8) goto TreasureMap3
+	rule		EnterCoord( 276 , 4 , 8) goto TreasureMap3
+	rule		EnterCoord( 276 , 5 , 8) goto TreasureMap3
 }
 
 state QuizLose1
 { 
-	action      		AddNpcText( 21 , "Awhaa! you are a fake pirate!! A real pirate would had told me that 'jolly roger' is the nickname of our flag." );
-	rule			TalkedToNpc( 21 ) goto Reset
+	action      AddNpcText( 21 , "Awhaa! you are a fake pirate!! A real pirate would had told me that 'jolly roger' is the nickname of our flag." );
+	rule		TalkedToNpc( 21 ) goto Reset
 
 }
 
 state QuizLose2
 { 
-	action      		AddNpcText( 21 , "Awhaa! you are a fake pirate!! A real pirate would had told me that our captain, pilot, carpenter and cook receive a double share.");
-	rule			TalkedToNpc( 21 ) goto Reset
+	action      AddNpcText( 21 , "Awhaa! you are a fake pirate!! A real pirate would had told me that our captain, pilot, carpenter and cook receive a double share.");
+	rule		TalkedToNpc( 21 ) goto Reset
 }
 
 state QuizLose3
 { 
-	action      		AddNpcText( 21 , "Awhaa! you are a fake pirate!! A real pirate would had told me that our captains cabin is always open.");
-	rule			TalkedToNpc( 21 ) goto Reset
+	action      AddNpcText( 21 , "Awhaa! you are a fake pirate!! A real pirate would had told me that our captains cabin is always open.");
+	rule		TalkedToNpc( 21 ) goto Reset
 }
 
 state RewardQuest
 { 
 
-	action			GiveExp(10800);
-	action			ShowHint("You gained 10800 EXP!")
-	action			PlaySound(18)
+	action		GiveExp(10800);
+	action		ShowHint("You gained 10800 EXP!")
+	action		PlaySound(18)
 	
-	action  		End()
+	action  	End()
 }
 
 state Lose
 { 
-	action      		AddNpcChat( 6 , "Arrr get off my boat");
-	action			ShowHint("Maybe you should become a merchant");
-	action			Reset(); 
+	action      AddNpcChat( 6 , "Arrr get off my boat");
+	action		ShowHint("Maybe you should become a merchant");
+	action		Reset(); 
 
 }
 
 state Reset
 {
-	action			ShowHint("The pirate lost his interest in you..")
-	action			Reset() // reset and abort quest
+	action		ShowHint("The pirate lost his interest in you..")
+	action		Reset() // reset and abort quest
 }	

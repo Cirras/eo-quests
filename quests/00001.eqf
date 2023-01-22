@@ -58,8 +58,8 @@ state Learn3
 
 state GoReset
 {
-	ShowHint("Pjedro's son quest aborted!")
-	Reset()
+	action  	ShowHint("Pjedro's son quest aborted!")
+	action  	Reset()
 }
 
 state GoAnundo
@@ -211,5 +211,5 @@ state GetReward
 	action		ShowHint("You gained 12600 EXP!")
 	action		PlaySound(18)
 
-	End()
+	action  	End()
 }	

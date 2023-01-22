@@ -465,7 +465,7 @@ state RewardQuest
 	action			ShowHint("You gained 10800 EXP!")
 	action			PlaySound(18)
 	
-	End()
+	action  		End()
 }
 
 state Lose

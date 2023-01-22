@@ -25,7 +25,7 @@ state Begin
 
 state GoReset
 {
-	Reset();
+	action  	Reset();
 }
 
 state ExplainMore
@@ -37,10 +37,10 @@ state ExplainMore
 	action		AddNpcText( 20 , "To do this walk on top of the button located near the generators, once the main power grid is down you can access the main core area.");
 	action		AddNpcText( 20 , "The main reactor is somewhere deep underground, once you get there shut it down as well.");
 	action		AddNpcText( 20 , "From that point we can take it over, and hopefully get the factory under control as well.");	
-	rule		TalkedToNpc( 20 ) goto Node1-1
+	rule		TalkedToNpc( 20 ) goto Node1_1
 }
 
-state Node1-1
+state Node1_1
 {
 	desc		"Shutdown generator #1"
 
@@ -129,5 +129,5 @@ state GetReward
 	action		PlaySound(17);
 	action		GiveExp(4940);
 	
-	rule		Reset();
+	action		Reset();
 }

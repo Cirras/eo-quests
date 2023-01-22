@@ -61,31 +61,31 @@ state Class
 state Priest
 {
 	action		SetClass(2)
-	Reset()
+	action  	Reset()
 }
 
 state Magician
 {
 	action		SetClass(3)
-	Reset()
+	action  	Reset()
 }
 
 state Rogue
 {
 	action		SetClass(4)
-	Reset()
+	action  	Reset()
 }
 
 state Archer
 {
 	action		SetClass(5)
-	Reset()
+	action  	Reset()
 }
 
 state Warrior
 {
 	action		SetClass(6)
-	Reset()
+	action  	Reset()
 }
 
 state Take10

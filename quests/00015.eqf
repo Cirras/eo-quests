@@ -41,7 +41,7 @@ state MonstersOk
 state GoReset
 {
 	action		AddNpcText( 15 , "Very well, I cant blame you.." );
-	Reset();
+	action  	Reset();
 }
 
 state ExplainMore
@@ -314,7 +314,7 @@ state GotAncientScrolls
 state AncientCity
 {
 	desc		"Warp to ancient city"
-	rule 		RemoveItem( 64, 4 );
+	action 		RemoveItem( 64, 4 );
 	action		AddNpcText( 2 , "Please hurry to the ancient sacred place!");
 	rule 		EnterMap( 54 ) goto AncientAltar
 }

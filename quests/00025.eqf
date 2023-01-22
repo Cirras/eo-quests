@@ -43,7 +43,7 @@ state KillMoles
 state Talk2
 {
 	desc		"Talk to Susan"
-	action		ShowHint("Go to susan for a reward!)
+	action		ShowHint("Go to susan for a reward!")
 	action		AddNpcChat( 25 , "Thank you so much,!" );
 	action		AddNpcText( 25 , "Thank you so much *hug* here is a special reward for you!" );
 

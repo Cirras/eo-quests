@@ -363,7 +363,7 @@ state Reward1
 	action		ShowHint("You gained 18200 EXP and 2200 gold!")
 	action		PlaySound(18)
 
-	End()
+	action  	End()
 }
 
 state Reward2
@@ -376,7 +376,7 @@ state Reward2
 	action		ShowHint("You gained 22200 EXP!")
 	action		PlaySound(18)
 
-	End()
+	action  	End()
 }
 
 state Reset

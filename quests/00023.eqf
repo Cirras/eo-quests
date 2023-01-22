@@ -41,7 +41,7 @@ state KillMoles
 state Talk2
 {
 	desc		"Talk to PeriPeri farmer"
-	action		ShowHint("Go to periperi for a reward!)
+	action		ShowHint("Go to periperi for a reward!")
 	action		AddNpcChat( 23 , "Thank you so much,!" );
 	action		AddNpcText( 23 , "Thank you so much, I can see you worked hard.. Please accept my humble reward." );
 

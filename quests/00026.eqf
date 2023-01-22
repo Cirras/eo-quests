@@ -33,10 +33,10 @@ state Test1
 	action		AddNpcInput( 26 , 1 , "Take the test");
 	action		AddNpcInput( 26 , 2 , "Give up");
 
-	rule 		KilledNpcs( 9, 1) goto Test1-1
+	rule 		KilledNpcs( 9, 1) goto Test1_1
 }
 
-state Test1-1
+state Test1_1
 {
 	desc		"Return to wraith guardian"
 	action		AddNpcText( 26 , "Isss nothinggg you slimmeee, nowwhh you ssshall do another tassssk");
@@ -52,10 +52,10 @@ state Test2
 	action		AddNpcInput( 26 , 2 , "Give up");
 
 	rule 		InputNpc( 2 ) goto Reset
-	rule 		KilledNpcs( 120 , 1 ) goto Test2-2
+	rule 		KilledNpcs( 120 , 1 ) goto Test2_2
 }
 
-state Test2-2
+state Test2_2
 {
 	desc		"Return to wraith guardian"
 	action		AddNpcText( 26 , "Reaperrr deadd, annundo leadehhrrr deaddd.. but yewww still humannn and therrforrr shalll nott passshh..");
@@ -71,10 +71,10 @@ state Test3
 	action		AddNpcInput( 26 , 2 , "Give up");
 
 	rule 		InputNpc( 2 ) goto Reset
-	rule 		KilledNpcs( 118 , 1 ) goto Test3-2
+	rule 		KilledNpcs( 118 , 1 ) goto Test3_2
 }
 
-state Test3-2
+state Test3_2
 {
 	desc		"Return to wraith guardian"
 	action		AddNpcText( 26 , "Reaperrr deadd, annundo leadehhrrr deaddd and octooo ashwooo deaddddddd.. youwwh shall do another tassssk");
@@ -90,10 +90,10 @@ state Test4
 	action		AddNpcInput( 26 , 2 , "Give up");
 
 	rule 		InputNpc( 2 ) goto Reset
-	rule 		KilledNpcs( 142 , 1 ) goto Test4-2
+	rule 		KilledNpcs( 142 , 1 ) goto Test4_2
 }
 
-state Test4-2
+state Test4_2
 {
 	desc		"Return to wraith guardian"
 	action		AddNpcText( 26 , "Wehll wehlll, yewww sneaky incompetent humann, yewww neverrrr gett thisss keyyy sssssww...");
@@ -104,10 +104,10 @@ state Test5
 {
 	desc		"Find piglets"
 	action		AddNpcText( 26 , "Bringhhh me 100 pigletssss sohh we can offerrrr it too the evilll spiritthhhs");
-	rule		GotItems( 483 , 100 ) goto Test5-2
+	rule		GotItems( 483 , 100 ) goto Test5_2
 }
 
-state Test5-2
+state Test5_2
 {
 	desc		"Give piglets to guardian"
 	action		AddNpcText( 26 , "Giveeehh meee nowhh..");
@@ -115,28 +115,28 @@ state Test5-2
 	action		AddNpcInput( 26 , 1 , "Give the 100 piglets");
 	action		AddNpcInput( 26 , 2 , "No, sorry no deal.");
 
-	rule 		InputNpc( 1 ) goto Test5-3
+	rule 		InputNpc( 1 ) goto Test5_3
 	rule		LostItems( 483 , 100 ) goto Test5
 }
 
-state Test5-3
+state Test5_3
 {
 	desc		"Find snake teeth"
 	action		RemoveItem( 483 , 100 );
 	action		Quake(5);
 
 	action		AddNpcText( 26 , "Bringhhh me 100 snake teeethh sohh we can offerrrr it too the evilll spiritthhhs");
-	rule		GotItems( 253 , 100 ) goto Test6-2
+	rule		GotItems( 253 , 100 ) goto Test6_2
 }
 
 state Test6
 {
 	desc		"Find snake teeth"
 	action		AddNpcText( 26 , "Bringhhh me 100 snake teeethh sohh we can offerrrr it too the evilll spiritthhhs");
-	rule		GotItems( 253 , 100 ) goto Test6-2
+	rule		GotItems( 253 , 100 ) goto Test6_2
 }
 
-state Test6-2
+state Test6_2
 {
 	desc		"Give snake teeth to guardian"
 	action		AddNpcText( 26 , "Giveeehh meee your teeethh..");
@@ -144,18 +144,18 @@ state Test6-2
 	action		AddNpcInput( 26 , 1 , "Give 100 snake teeth");
 	action		AddNpcInput( 26 , 2 , "No, sorry no deal.");
 
-	rule 		InputNpc( 1 ) goto Test6-3
+	rule 		InputNpc( 1 ) goto Test6_3
 	rule		LostItems( 253 , 100 ) goto Test6
 }
 
-state Test6-3
+state Test6_3
 {
 	desc		"Find tenba bags"
 	action		RemoveItem( 253 , 100 );
 	action		Quake(5);
 
 	action		AddNpcText( 26 , "Bringhhh me 100 tenba baggss to offhherr..");
-	rule		GotItems( 477 , 100 ) goto Test7-2
+	rule		GotItems( 477 , 100 ) goto Test7_2
 }
 
 
@@ -165,10 +165,10 @@ state Test7
 	desc		"Find tenba bags"
 
 	action		AddNpcText( 26 , "Bringhhh me 100 tenba baggss to offhherr..");
-	rule		GotItems( 477 , 100 ) goto Test7-2
+	rule		GotItems( 477 , 100 ) goto Test7_2
 }
 
-state Test7-2
+state Test7_2
 {
 	desc		"Give tenba bags to guardian"
 	action		AddNpcText( 26, "Giveeehh meee baggggs yeww sssssww incompetent humannn..");
@@ -176,18 +176,18 @@ state Test7-2
 	action		AddNpcInput( 26 , 1 , "Give 100 tenba bags");
 	action		AddNpcInput( 26 , 2 , "No, sorry no deal.");
 
-	rule 		InputNpc( 1 ) goto Test7-3
+	rule 		InputNpc( 1 ) goto Test7_3
 	rule		LostItems( 477 , 100 ) goto Test7
 }
 
-state Test7-3
+state Test7_3
 {
 	desc		"Find imp stings"
 	action		RemoveItem( 477 , 100 );
 	action		Quake(5);
 
 	action		AddNpcText( 26 , "Bringhhh me 100 imppp stingggsss yeww humannn");
-	rule		GotItems( 400 , 100 ) goto Test8-2
+	rule		GotItems( 400 , 100 ) goto Test8_2
 }
 
 state Test8
@@ -195,10 +195,10 @@ state Test8
 	desc		"Find imp stings"
 
 	action		AddNpcText( 26 , "Bringhhh me 100 imppp stingggsss yeww humannn");
-	rule		GotItems( 400 , 100 ) goto Test8-2
+	rule		GotItems( 400 , 100 ) goto Test8_2
 }
 
-state Test8-2
+state Test8_2
 {
 	desc		"Give imp stings to guardian"
 	action		AddNpcText( 26, "Giveeehh meee thaa stringssss youu wurmmm..");
@@ -206,11 +206,11 @@ state Test8-2
 	action		AddNpcInput( 26 , 1 , "Give 100 imp strings");
 	action		AddNpcInput( 26 , 2 , "No, sorry no deal.");
 
-	rule 		InputNpc( 1 ) goto Test8-3
+	rule 		InputNpc( 1 ) goto Test8_3
 	rule		LostItems( 400 , 100 ) goto Test8
 }
 
-state Test8-3
+state Test8_3
 {
 	desc		"Find wurm heads"
 	action		RemoveItem( 400 , 100 );
@@ -219,7 +219,7 @@ state Test8-3
 	action		AddNpcText( 26 , "Bringhhh me sssssww 100 wurm heads to offhherr..");
 	action		RemoveItem( 483 , 100 );
 
-	rule		GotItems( 321 , 100 ) goto Test9-2
+	rule		GotItems( 321 , 100 ) goto Test9_2
 }
 
 state Test9
@@ -227,10 +227,10 @@ state Test9
 	desc		"Find wurm heads"
 
 	action		AddNpcText( 26 , "Bringhhh me sssssww 100 wurm heads to offhherr..");
-	rule		GotItems( 321 , 100 ) goto Test9-2
+	rule		GotItems( 321 , 100 ) goto Test9_2
 }
 
-state Test9-2
+state Test9_2
 {
 	desc		"Give wurm heads to guardian"
 	action		AddNpcText( 26, "Giveeehh meee wurm headdsss yeww pathetic human..");
@@ -238,11 +238,11 @@ state Test9-2
 	action		AddNpcInput( 26 , 1 , "Give 100 wurm heads");
 	action		AddNpcInput( 26 , 2 , "No, sorry no deal.");
 
-	rule 		InputNpc( 1 ) goto Test9-3
+	rule 		InputNpc( 1 ) goto Test9_3
 	rule		LostItems( 321 , 100 ) goto Test9
 }
 
-state Test9-3
+state Test9_3
 {
 	desc		"Find dragon wings"
 	action		RemoveItem( 321 , 100 );
@@ -251,7 +251,7 @@ state Test9-3
 	action		AddNpcText( 26 , "Bringhhh me sssssww 10 dragon wingggss to offhherr..");
 	action		RemoveItem( 483 , 100 );
 
-	rule		GotItems( 470 , 10 ) goto Test10-2
+	rule		GotItems( 470 , 10 ) goto Test10_2
 }
 
 state Test10
@@ -259,10 +259,10 @@ state Test10
 	desc		"Find dragon wings"
 
 	action		AddNpcText( 26, "Bringhhh me sssssww 10 dragon wingggss to offhherr..");
-	rule		GotItems( 470 , 10 ) goto Test10-2
+	rule		GotItems( 470 , 10 ) goto Test10_2
 }
 
-state Test10-2
+state Test10_2
 {
 	desc		"Give dragon wings to guardian"
 	action		AddNpcText( 26, "The wingssss, givvveee!");
@@ -270,11 +270,11 @@ state Test10-2
 	action		AddNpcInput( 26 , 1 , "Give 10 dragon wings");
 	action		AddNpcInput( 26 , 2 , "No, sorry no deal.");
 
-	rule 		InputNpc( 1 ) goto Test10-3
+	rule 		InputNpc( 1 ) goto Test10_3
 	rule		LostItems( 470 , 10 ) goto Test10
 }
 
-state Test10-3
+state Test10_3
 {
 	desc		"PK 500 humans!"
 	action		RemoveItem( 321 , 100 );

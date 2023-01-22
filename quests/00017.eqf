@@ -115,5 +115,5 @@ state EndWithoutReset
 
 state GoReset
 {
-	Reset()
+	action  	Reset()
 }

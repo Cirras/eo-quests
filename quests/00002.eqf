@@ -64,7 +64,7 @@ state GiveTeror
 {
 	desc		"Give a teror potion"
 	action		AddNpcText( 2 , "Do you happen to have a terror potion for me?" );
-	action		AddNpcInput( 2 , 1 , "Here, take it);
+	action		AddNpcInput( 2 , 1 , "Here, take it");
 	action		AddNpcInput( 2 , 2 , "No, its mine");
 	rule		LostItems(296,1) goto Talk2
 	rule		InputNpc( 1 ) goto GoodEnd
@@ -75,7 +75,7 @@ state GiveLove
 {
 	desc		"Give a love potion"
 	action		AddNpcText( 2 , "Do you happen to have a love potion for me?" );
-	action		AddNpcInput( 2 , 1 , "Here, take it);
+	action		AddNpcInput( 2 , 1 , "Here, take it");
 	action		AddNpcInput( 2 , 2 , "No, its mine");
 	rule		LostItems(292,1) goto Talk2
 	rule		InputNpc( 1 ) goto BadEnd

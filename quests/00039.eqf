@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Aeven Sewers"
@@ -108,7 +105,7 @@ state Begin6
 	action		AddNpcText( 39 , "Thajnk yo sow muwch *hic* youw ajre aj heroww" );
 	action		AddNpcText( 39 , "Now i neejd *hic* a drink.." );
 
-	rule 		TalkedToNpc( 39 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 39 ) goto GetReward
 }
 
 state GetReward
@@ -124,5 +121,5 @@ state GetReward
 state Reset
 {
 	action		ShowHint("Sewer repairs quest aborted..")
-	action		Reset() // reset and abort quest
+	action		Reset()
 }	

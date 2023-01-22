@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Slime Defender"
@@ -32,7 +29,7 @@ state Talk2
 	action		AddNpcChat( 30 , "You saved our village!" );
 	action		AddNpcText( 30 , "Thank you for getting ride of these blob creatures, please accept my reward." );
 
-	rule 		TalkedToNpc( 30 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 30 ) goto GetReward
 	rule		EnterMap( 1 ) goto Reset
 	rule		EnterMap( 5 ) goto Reset
 
@@ -51,5 +48,5 @@ state GetReward
 state Reset
 {
 	action		ShowHint("Slime defender quest aborted..")
-	action		Reset() // reset and abort quest
+	action		Reset()
 }	

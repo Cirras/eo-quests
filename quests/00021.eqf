@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest 111
-
 Main
 {
 	questname 	"Monkey Island"
@@ -479,5 +476,5 @@ state Lose
 state Reset
 {
 	action		ShowHint("The pirate lost his interest in you..")
-	action		Reset() // reset and abort quest
+	action		Reset()
 }	

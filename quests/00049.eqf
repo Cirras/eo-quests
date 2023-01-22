@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Snake Hunt (rep)"
@@ -9,9 +6,6 @@ Main
 
 state Begin
 {
-			// begin states only contains npctext or input, so the quest can only
-			// be triggered by talking to a NPC
-
 	desc		"Kill 3 snakes."
 	action		ShowHint("Quest reward : 66 EXP and 20 gold (REP)")
 	action		AddNpcText( 49 , "Hi im hunting some snakes, would you like to join me?" );
@@ -55,5 +49,5 @@ state GetReward
 state Reset
 {
 	action		ShowHint("snake hunt quest aborted..")
-	action		Reset() // reset and abort quest
+	action		Reset()
 }	

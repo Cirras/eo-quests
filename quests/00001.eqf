@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest 111
-
 Main
 {
 	questname 	"Pjedro's Son"

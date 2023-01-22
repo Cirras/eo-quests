@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Rare Berries"
@@ -44,7 +41,7 @@ state Begin3
 	action		AddNpcText( 38 , "Sometimes they spawn useless leaves, sadly i cannot pay you for that.");
 	action		AddNpcText( 38 , "You should remove the useless leaves, it prevents berries from growing.");
 
-	rule 		TalkedToNpc( 38 ) goto Begin2 // requires to talk
+	rule 		TalkedToNpc( 38 ) goto Begin2
 }
 
 state Talk2
@@ -54,7 +51,7 @@ state Talk2
 	action		AddNpcChat( 38 , "Great job!" );
 	action		AddNpcText( 38 , "10 excellent berries! Thanks for your business." );
 
-	rule 		TalkedToNpc( 38 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 38 ) goto GetReward
 	rule		LostItems( 486 , 20 ) goto Begin2
 
 }
@@ -73,5 +70,5 @@ state GetReward
 state Reset
 {
 	action		ShowHint("Rare Berries quest aborted..")
-	action		Reset() // reset and abort quest
+	action		Reset()
 }	

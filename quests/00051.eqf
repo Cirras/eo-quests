@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"King Audience (daily)"
@@ -64,7 +61,7 @@ state Talk2
 	action		AddNpcText( 51 , "Thank you for taking care of our problem, the king is eager to speak to you about an important matter.");
 	action		AddNpcText( 51 , "Please take this scroll, it will take you to our beloved king.");
 
-	rule 		TalkedToNpc( 51 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 51 ) goto GetReward
 }
 
 state GetReward
@@ -82,7 +79,7 @@ state EndByAlready
 	desc		"Talk to royal guard, castle"
 	action		ShowHint("You can only complete this quest once a day.");
 	action		AddNpcText( 51 , "Hmmm, you already seem to carry to aucience sroll. The king is expecting you just read the scroll." );
-	rule 		TalkedToNpc( 51 ) goto Reset // requires to talk	
+	rule 		TalkedToNpc( 51 ) goto Reset
 }
 
 state EndWithoutReset
@@ -91,11 +88,11 @@ state EndWithoutReset
 	action		ShowHint("You can only complete this quest once a day.");
 	action		AddNpcText( 51 , "Im sorry but you already received your audience with the king, please come back later." );
 	action		AddNpcText( 51 , "[ you cannot complete this quest today , please come back tomorrow ]" );
-	rule 		TalkedToNpc( 51 ) goto Reset // requires to talk	
+	rule 		TalkedToNpc( 51 ) goto Reset
 }
 
 state Reset
 {
 	action		ShowHint("King Audience quest aborted..")
-	action		Reset(); // reset and abort quest
+	action		Reset();
 }	

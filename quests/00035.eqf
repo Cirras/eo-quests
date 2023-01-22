@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Rat Problems"
@@ -67,7 +64,7 @@ state Talk3
 	action		AddNpcChat( 35 , "Thank you so much for killing those rats!" );
 	action		AddNpcText( 35 , "Thank you so much for killing those rats! My wife and I are very happy now! Here is your reward" );
 
-	rule 		TalkedToNpc( 35 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 35 ) goto GetReward
 
 }
 
@@ -83,5 +80,5 @@ state GetReward
 state Reset
 {
 	action		ShowHint("Rat problems quest aborted..")
-	action		Reset() // reset and abort quest
+	action		Reset()
 }	

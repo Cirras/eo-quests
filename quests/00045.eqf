@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Candy's Potion (daily)"
@@ -12,7 +9,7 @@ state Begin
 	desc		"Talk to Candy, Aeven."
 	action		AddNpcText( 45 , "Hi i'm Candy, the new apprentice of Aeven's mighty witch." );
 
-	rule 		TalkedToNpc( 45 ) goto Begin2 // requires to talk
+	rule 		TalkedToNpc( 45 ) goto Begin2
 }
 
 state Begin2
@@ -37,7 +34,7 @@ state Talk2
 	action		AddNpcChat( 45 , "New supplies!" );
 	action		AddNpcText( 45 , "Ah! i see you found the 5 snake tooth for me already, thanks now i can complete the magic potion.");
 
-	rule 		TalkedToNpc( 45 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 45 ) goto GetReward
 	rule		LostItems( 253 , 5 ) goto Begin2
 
 }
@@ -59,11 +56,11 @@ state EndWithoutReset
 	action		AddNpcText( 45 , "Thank you so much for collecting those final ingredients for my potion. I dont need more snake tooth at the moment!" );
 	action		AddNpcText( 45 , "Maybe you should go see my sister Ayla, she is always looking for some rat tails! You can find her inside the witch mansion, located east of Aeven." );
 	action		AddNpcText( 45 , "[ you cannot complete this quest today , please come back tomorrow ]" );
-	rule 		TalkedToNpc( 45 ) goto Reset // requires to talk	
+	rule 		TalkedToNpc( 45 ) goto Reset
 }
 
 state Reset
 {
 	action		ShowHint("Snake Antidote quest aborted..")
-	action		Reset(); // reset and abort quest
+	action		Reset();
 }	

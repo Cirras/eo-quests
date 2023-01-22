@@ -1,5 +1,3 @@
-// quest by Vult-r
-
 Main
 {
 	questname	"The maze (daily)"
@@ -110,7 +108,7 @@ state EndWithoutReset
 	action		ShowHint("You can only complete this quest 3 times a day.");
 	action		AddNpcText( 17 , "Hmmm it seems you became way too good at solving my maze, this is no fun for me.. go away!" );
 	action		AddNpcText( 17 , "[ you cannot complete this quest today , please come back tomorrow ]" );
-	rule 		TalkedToNpc( 17 ) goto Reset // requires to talk	
+	rule 		TalkedToNpc( 17 ) goto Reset
 }
 
 state GoReset

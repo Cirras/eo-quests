@@ -1,6 +1,3 @@
-// QUest Engine 0.01 example script by VUlt-r
-// script shows how to initialize and begin the quest
-
 Main
 {
 	questname 	"Fox fur (daily)"
@@ -43,7 +40,7 @@ state Talk2
 	action		AddNpcText( 50 , "Ahh, i see you have succeeded in hunting the fox fur!");
 	action		AddNpcText( 50 , "Thanks for hunting the fur for us, i will take it in and  inform my brother about your success.");
 
-	rule 		TalkedToNpc( 50 ) goto GetReward // requires to talk
+	rule 		TalkedToNpc( 50 ) goto GetReward
 	rule		LostItems( 252 , 15 ) goto Begin2
 
 }
@@ -65,11 +62,11 @@ state EndWithoutReset
 	action		ShowHint("You can only complete this quest once a day.");
 	action		AddNpcText( 50 , "Okay thats enough fox fur for today, me and my brother thank you for your help." );
 	action		AddNpcText( 50 , "[ you cannot complete this quest today , please come back tomorrow ]" );
-	rule 		TalkedToNpc( 50 ) goto Reset // requires to talk	
+	rule 		TalkedToNpc( 50 ) goto Reset
 }
 
 state Reset
 {
 	action		ShowHint("Snake Antidote quest aborted..")
-	action		Reset(); // reset and abort quest
+	action		Reset();
 }	

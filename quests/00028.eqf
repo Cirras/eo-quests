@@ -1,0 +1,52 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Piglet Trouble"
+	version		1
+}
+
+state Begin
+{
+	desc		"Kill 10 normal piglets."
+	action		ShowHint("Quest reward : 100 EXP, 25 gold")
+	action		AddNpcText( 28 , "Those piglets are a real plague, could you help me get ride of them?" );
+	action		AddNpcText( 28 , "Could you kill 5 normal piglets for me? Press on your [CTRL] key to attack." );
+
+	action		AddNpcInput( 28 , 1 , "No thanks");
+	action		AddNpcInput( 28 , 2 , "Sounds good.");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 230, 10) goto Talk2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk2
+{
+	desc		"Talk to the village adventurer."
+	action		AddNpcChat( 28 , "Great job!" );
+	action		AddNpcText( 28 , "Thank you so much thats better, please accept this gold for your great work." );
+
+	rule 		TalkedToNpc( 28 ) goto GetReward // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 100 EXP and 25 gold!");
+	action		PlaySound(17);
+
+	action		GiveExp(100)
+	action		GiveItem( 1 , 25)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Piglet trouble quest aborted..")
+	action		Reset() // reset and abort quest
+}	

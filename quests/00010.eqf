@@ -1,0 +1,81 @@
+// quest by Vult-r
+
+Main
+{
+	questname	"Guard Job (rep)"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to guard, Stronghold swamp"
+	action		AddNpcText( 10 , "Hi, im here to guard this cave entrance, quite many smugglers from Anundo are trying to bring illegal fairy soda into Aeven.");
+	action		AddNpcText( 10 , "I been here for quite long and those spiders bite me several times, i wish someone could do something about these spiders..");
+	rule		TalkedToNpc(10) goto HelpGuard
+
+}
+
+state HelpGuard
+{
+	desc		"Kill 20 spiders, Stronghold swamp"
+	action		ShowHint("Quest reward: 6050 EXP")
+	action		AddNpcText( 10 , "I pay 300 gold and 6050 exp for every 20 spiders killed.");
+
+	action		AddNpcInput( 10 , 1 , "Working on it.");
+	action		AddNpcInput( 10 , 2 , "I want to abort.");
+
+	rule 		InputNpc( 2 ) goto GoReset
+	rule		KilledNpcs( 10 , 20 ) goto KilledSpiders
+}
+
+state KilledSpiders
+{
+	desc		"Talk to guard, Stronghold swamp"
+	action		AddNpcText( 10 , "So, you killed 20 swamp spiders already? I am sorry but i cannot believe it.. Bring me at least 10 spider legs to prove it.");
+	rule		GotItems( 257 , 10 ) goto GotProve
+}
+
+state GotProve
+{
+	desc		"Talk to guard, Stronghold swamp"
+	action		AddNpcText( 10 , "You really killed those spiders, can i have those legs?");
+
+	action		AddNpcInput( 10 , 1 , "Ok, here you are.");
+	action		AddNpcInput( 10 , 2 , "No, sorry no deal.");
+
+	rule 		InputNpc( 1 ) goto GotoCastle
+	rule 		InputNpc( 2 ) goto GoReset
+	rule		LostItems( 257 , 10 ) goto KilledSpiders
+}
+
+state GotoCastle
+{
+	desc		"Go to the Castle"
+	action		RemoveItem( 257 , 10)
+	action		AddNpcText( 10 , "Please visit my captain at the imperial castle, he will reward you for your efforts.");
+	rule		EnterMap( 46 ) goto FindCaptain
+}
+
+state FindCaptain
+{
+	desc		"Talk to captain, Castle"
+	action		AddNpcText( 10 , "Please visit my captain at the imperial castle, he will reward  you for your efforts.");
+	action		AddNpcText( 11 , "I heared that you have been assisting one of our imperial guards, located at the swamps.");
+	action		AddNpcText( 11 , "I will reward you with some combat experience and gold, as a reward for your brave services.");
+	rule		TalkedToNpc( 11 ) goto Reward
+}
+
+state GoReset
+{
+	action		Reset()
+}
+
+state Reward
+{
+	action		GiveExp( 6050 )
+	action		GiveItem( 1 , 300)
+	action		PlaySound(17);
+
+	action		ShowHint("You gained 6050 EXP and 100 gold!!");
+	action		Reset()
+}

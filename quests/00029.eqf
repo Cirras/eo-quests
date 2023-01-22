@@ -1,0 +1,65 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Goat Business"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to the village collector."
+	action		AddNpcText( 29 , "Its hard collecting new goat horns now that cyndi, inside the village shop, is crafting daggers out of 2 goat horns" );
+	action		AddNpcText( 29 , "You can pickup any item on the ground by clicking on it with your left mouse button." );
+
+	rule 		TalkedToNpc( 29 ) goto Begin2 // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin2
+{
+	desc		"Collect 6 goat horns"
+	action		ShowHint("Quest reward : 600 EXP")
+	action		AddNpcText( 29 , "I need 6 shiny goat horns to complete my collection.." );
+
+	action		AddNpcInput( 29 , 1 , "No thanks");
+	action		AddNpcInput( 29 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 258 , 6 ) goto Talk2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk2
+{
+	desc		"Talk to the village collector."
+	action		ShowHint("You succesfully collected 6 goat horns")
+	action		AddNpcChat( 29 , "Goat horns!" );
+	action		AddNpcText( 29 , "Thanks for bringing me the goat horns. As promised, please accept my reward." );
+
+	rule 		TalkedToNpc( 29 ) goto GetReward // requires to talk
+	rule		LostItems( 258 , 6 ) goto Begin2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 500 EXP and 2 health potions!");
+	action		PlaySound(17);
+
+	action		RemoveItem( 258 , 6 )
+	action		GiveItem( 2 , 2)
+	action		GiveExp(500)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Goat collector quest aborted..")
+	action		Reset() // reset and abort quest
+}	

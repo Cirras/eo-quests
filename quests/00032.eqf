@@ -1,0 +1,65 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Lost Piggy"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to little Eddy."
+	action		AddNpcText( 32 , "Boohoo i lost little piggy, my favorite toy!" );
+	action		AddNpcText( 32 , "During visiting my aunty Cyndi in the village i lost it, and i can't find it back!" );
+
+	rule 		TalkedToNpc( 32 ) goto Begin2 // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin2
+{
+	desc		"Collect little piggy"
+	action		ShowHint("Quest reward : 400 EXP")
+	action		AddNpcText( 32 , "Could you find little piggy for me?" );
+
+	action		AddNpcInput( 32 , 1 , "No thanks");
+	action		AddNpcInput( 32 , 2 , "Sure");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 483 , 1 ) goto Talk2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk2
+{
+	desc		"Talk to little Eddy."
+	action		ShowHint("You succesfully collected 10 blob slime")
+	action		AddNpcChat( 32 , "Yeeee!" );
+	action		AddNpcText( 32 , "You found it! You find little piggy! As promised, please take this reward!" );
+
+	rule 		TalkedToNpc( 32 ) goto GetReward // requires to talk
+	rule		LostItems( 483 , 1 ) goto Begin2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 400 EXP and 5 health potions.");
+	action		PlaySound(17);
+
+	action		RemoveItem( 483 , 1 )
+	action		GiveItem( 2 , 5)
+	action		GiveExp(400)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Little piggy quest aborted..")
+	action		Reset() // reset and abort quest
+}	

@@ -1,0 +1,85 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Special Hairdye (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Talk to Hector, Aeven square"
+	action		ShowHint("Quest reward : 240 EXP (REP)")
+	action		AddNpcText( 41 , "Hi! my mom is a famous haircutter! She even has her own barbershop in the northeast of Aeven!" );
+	action		AddNpcText( 41 , "Im sure her customers will really like my new special hairdye and I am already working on an improved version!" );
+	action		AddNpcText( 41 , "Could you bring this new hairdye potion to her?" );
+
+	action		AddNpcInput( 41 , 1 , "Sorry, not interested.");
+	action		AddNpcInput( 41 , 2 , "Sure, I will bring it to her.");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Talk1
+}
+
+state Begin2
+{
+	desc		"Talk to Hector, Aeven square"
+	action		ShowHint("Ohno! you lost the special hairdye..")
+	action		AddNpcText( 41 , "Ohno! you lost the special hairdye.." );
+	action		AddNpcText( 41 , "No problem! I just finished a new one." );
+	rule		TalkedToNpc( 41 ) goto Talk1
+
+}
+
+state Talk1
+{
+	desc		"Bring the item to Babs, Aeven"
+	action		ShowHint("Quest reward : 240 EXP (REP)")
+	action		AddNpcText( 41 , "Here take this special hairdye, don't steal it and don't let it fall.." );
+	action		AddNpcText( 41 , "You can find my mother in her own hairsalon at the north-east of Aeven." );
+
+	action		AddNpcText( 42 , "Ohno, not another hairdye!" );
+	action		AddNpcText( 42 , "Grass mixed together with dirt and flowers (...) heh-heh kids can be so silly sometimes.." );
+
+	action		AddNpcInput( 41 , 1 , "Your hairdye is worthless");
+	action		AddNpcInput( 41 , 2 , "Sure, I will bring it to her.");
+
+	rule 		InputNpc( 1 ) goto Reset
+
+	action		GiveItem( 488 , 1)
+
+	rule		TalkedToNpc( 42 ) goto TakeDye
+	rule		LostItems( 488 , 1 ) goto Begin2
+	rule 		InputNpc( 1 ) goto Reset
+}
+
+state TakeDye
+{
+	desc		"Report to peasant woman"
+	action		RemoveItem( 488 , 10)	
+	action		AddNpcText( 42 , "Im a little embarrassed for your troubles (...) heh-heh you know how kids can be.." );
+	action		AddNpcText( 42 , "Let me take the potion off you, i will offer you some discount on your next haircut to make it up." );
+	action		AddNpcText( 42 , "Hopefully all the efforts gave you some experience!" );
+
+	rule		TalkedToNpc( 42 ) goto GetReward
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 240 EXP (REP)");
+	action		PlaySound(17);
+
+	action		GiveExp(240)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Special Hairdye quest aborted..")
+	action		Reset() // reset and abort quest
+}	

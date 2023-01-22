@@ -1,0 +1,133 @@
+// quest by Vult-r
+
+Main
+{
+	questname	"Factory Panic (rep)"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to the factory co-worker"
+
+	action		AddNpcText( 20 , "We really can use some help down here, things have gone terribly wrong.");
+	action		AddNpcText( 20 , "A long time ago we lost control over the system and the whole factory went crazy, things gone terribly wrong here..");
+	action		AddNpcText( 20 , "The robots are hovering around killing everything in sight, we cannot go down ourself to fix the problem.");
+	action		AddNpcText( 20 , "Would you please help us fix the main reactor, from that point we should be able to repair the rest of the factory.");
+	action		AddNpcText( 20 , "Will you please help us repair the main reactor of the factory?");
+
+	action		AddNpcInput( 20 , 1 , "Okay, i help you");
+	action		AddNpcInput( 20 , 2 , "No, sorry");
+
+	rule 		InputNpc( 1 ) goto ExplainMore
+	rule		InputNpc( 2 ) goto GoReset
+}
+
+state GoReset
+{
+	Reset();
+}
+
+state ExplainMore
+{
+	desc		"Talk to the factory co-worker"
+
+	action		ShowHint("Quest reward: 4940 EXP (REP)")
+	action		AddNpcText( 20 , "Okay listen carefully, to shut down the main reactor you need to go down and shutdown the 4 power generators first.");
+	action		AddNpcText( 20 , "To do this walk on top of the button located near the generators, once the main power grid is down you can access the main core area.");
+	action		AddNpcText( 20 , "The main reactor is somewhere deep underground, once you get there shut it down as well.");
+	action		AddNpcText( 20 , "From that point we can take it over, and hopefully get the factory under control as well.");	
+	rule		TalkedToNpc( 20 ) goto Node1-1
+}
+
+state Node1-1
+{
+	desc		"Shutdown generator #1"
+
+	action		AddNpcText( 20 , "Please shutdown the upper right generator first, and return here so i can adjust the system.");	
+	rule		EnterCoord( 209 , 20 , 10 ) goto Progress1
+}
+
+state Progress1
+{
+	desc		"Shutdown generator #2"
+
+	action		PlaySound(70)
+	action		ShowHint("the generator was shutdown");
+
+	action		AddNpcText( 20 , "Please shutdown the lower left generator now, please report the results so we can continue");	
+	rule		EnterCoord( 209 , 68 , 38 ) goto Progress2
+}
+
+state Progress2
+{
+	desc		"Shutdown generator #3"
+
+	action		PlaySound(70)
+	action		ShowHint("the generator was shutdown");
+
+	action		AddNpcText( 20 , "Please shutdown the upper left generator now, its going great so far..");	
+	rule		EnterCoord( 209 , 7 , 52) goto Progress3
+}
+
+state Progress3
+{
+	desc		"Shutdown generator #4"
+
+	action		PlaySound(70)
+	action		ShowHint("the generator was shutdown");
+
+	action		AddNpcText( 20 , "Please shutdown the lower right generator now, to unlock the gate to the main reactor room.");	
+	rule		EnterCoord( 209 , 54 , 7) goto Progress4
+}
+
+state Progress4
+{
+	desc		"Return to the co-worker"
+
+	action		PlaySound(70)
+	action		ShowHint("the generator was shutdown");
+
+	action		AddNpcText( 20 , "Ok, the main power grid is down, i have unlocked the door to the main reactor for you.");
+	action		AddNpcText( 20 , "I am not sure if the robots gained access to that area already, if so it might be dangerous in there.");
+	rule		TalkedToNpc( 20 ) goto MainReactor
+}
+
+state MainReactor
+{
+	desc		"Find the main reactor room"
+	action		AddNpcText( 20 , "Please hurry to the main reactor room.");
+	rule		EnterCoord( 209 , 17 , 12) goto EnterReactor
+}
+
+state EnterReactor
+{
+	desc		"Shut down the main reactor"
+
+	action		SetMap( 209, 14, 12);	
+
+	rule		EnterCoord( 209 , 17 , 12) goto EnterReactor
+	rule		EnterCoord( 189 , 9 , 177) goto ReactorOk
+}
+
+state ReactorOk
+{
+	desc		"Return to the co-worker"
+
+	action		PlaySound(70)
+	action		ShowHint("the main reactor was shutdown, return to the co-worker!");
+
+	action		AddNpcText( 20 , "Ok the main reactor is shutting down slowly.. from there we should be able to take control on the other reactors.");
+	action		AddNpcText( 20 , "Thank you for helping us without you we never could have done it, please accept this small reward.");
+	rule		TalkedToNpc( 20 ) goto GetReward
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 4940 EXP!");
+
+	action		PlaySound(17);
+	action		GiveExp(4940);
+	
+	rule		Reset();
+}

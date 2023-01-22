@@ -1,0 +1,215 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest 111
+
+Main
+{
+	questname 	"Pjedro's Son"
+	version		2
+}
+
+state Begin
+{
+	desc		"Talk to Pjedro"
+	action		AddNpcText( 1 , "Hi, i never seen you before, let me introduce myself. I am pjedro, i used to be a famous farmer known from Aeven to Anundo.." );
+	action		AddNpcText( 1 , "Now my days are sad, and empty. Do you want to hear more of my story?" );
+	action		AddNpcInput( 1 , 1 , "Yes please tell me");
+	action		AddNpcInput( 1 , 2 , "No time, sorry!");
+
+	rule 		InputNpc( 1 ) goto Learn1
+	rule 		InputNpc( 2 ) goto GoReset
+}
+
+state Learn1
+{
+	desc		"Talk to Pjedro's Wife"
+	action		ShowHint("Quest reward: 12600 EXP")
+	action		AddNpcText( 1 , "My son, i lost our son.. i should had listened to my wife." );
+	action		AddNpcText( 3 , "Yes our son is missing, but how.. how do you know about our son?");
+
+	action		AddNpcInput( 3 , 1 , "Pjedro told me");
+	action		AddNpcInput( 3 , 2 , "Never mind");
+
+	rule 		InputNpc( 1 ) goto Learn2
+	rule 		InputNpc( 2 ) goto GoReset
+}
+
+
+state Learn2
+{
+	desc		"Talk to Merriad"
+	action		AddNpcText( 3 , "Me and pjedro, we worked very hard all our lives.. Harvesting crops, producing vegetables.. We worked way too hard." );
+	action		AddNpcText( 3 , "We sended our little son to deliver some vegtables to our relatives at the Stronghold, because we were too busy harvesting the crops..");
+
+	rule 		TalkedToNpc(3) goto Learn3
+}
+
+state Learn3
+{
+	desc		"Talk to Pjedro"
+	action		AddNpcText( 3 , "He traveled all alone, and never returned home.. I wish we would had never send him out *boohoo*" );
+	action		AddNpcText( 1 , "Merriad is mad at me since the accident.. We wish that we delivered those vegtables ourselves." );
+	action		AddNpcText( 1 , "Could you check with our relatives at the Stronghold?" );
+	action		AddNpcInput( 1 , 1 , "Yes, i will");
+	action		AddNpcInput( 1 , 2 , "No, sorry");
+
+	rule 		InputNpc( 1 ) goto GoAnundo
+	rule 		InputNpc( 2 ) goto GoReset
+}
+
+state GoReset
+{
+	ShowHint("Pjedro's son quest aborted!")
+	Reset()
+}
+
+state GoAnundo
+{
+	desc		"Find Nena in Stronghold"
+	action		AddNpcText( 1 , "The stronghold is located to the east, just follow the path.. please find our little boy.." );
+	rule		EnterMap( 68 ) goto TalkAunt
+}
+
+state TalkAunt
+{
+	desc		"Talk to Nena, stronghold"
+
+	action		AddNpcText( 9 , "I am so worried about Pjedro's son.. He never made it here, something terrible must have happened. ");
+	action		AddNpcText( 9 , "I never been outside this stronghold for years, I hope nothing bad happened.");
+
+	action		AddNpcInput( 9 , 1 , "No worries, i will find him");
+	action		AddNpcInput( 9 , 2 , "Oh, the carnivos ate him");
+
+	rule 		InputNpc( 1 ) goto FindWitness
+	rule 		InputNpc( 2 ) goto FindWitness2
+}
+
+state FindWitness
+{
+	desc		"Find out what happened.."
+	action		AddNpcText( 9 , "Thank you so much for helping us, something must have happened to him..");
+	action		AddNpcText( 9 , "Many people take the wrong turn before the Stronghold and end up in the swamps north of here..");
+	rule		EnterMap( 41 ) goto TalkGuard
+}
+
+state FindWitness2
+{
+	desc		"Find out what happened.."
+	action		AddNpcText( 9 , "Are you serious? please stop joking! *panic in nenas eyes*");
+	rule		EnterMap( 41 ) goto TalkGuard
+}
+
+state TalkGuard
+{
+	desc		"Talk to swamp guard"
+
+	action		AddNpcText( 10 , "You looking for a little kid carrying some vegtables. Yes i recall seeing a little kid walking here..");
+	action		AddNpcText( 10 , "But im affraid i cannot tell you more, we are not allowed to talk to civilians, Imperial rules you know..");
+	action		AddNpcText( 10 , "Please go see our captain. He is guarding Aeven's south entrance against the invading sheeps *chuckling*");
+
+	rule 		TalkedToNpc(10) goto GetPermission
+}
+
+state GetPermission
+{
+	desc		"Travel to Aeven southern border"
+	action		AddNpcText( 10 , "Sorry I am not allowed to talk to civilians without the permission of my well respected captain!");
+	rule		EnterMap( 2 ) goto TalkCaptain
+}
+
+state TalkCaptain
+{
+	desc		"Speak captain, south Aeven"
+
+	action		AddNpcText( 34 , "So you are looking for a little kid that got lost on the way to the Stronghold? You are truely noble..");
+	action		AddNpcText( 34 , "Yes, ofcourse you have my permission.. I cannot believe he did not tell you right away, good guards are hard to find these days *sighs*");
+
+	rule		TalkedToNpc(34) goto TalkGuard2
+}
+
+state TalkGuard2
+{
+	desc		"Talk to guard, Stronghold swamp"
+
+	action		AddNpcText( 34 , "I have ordered the swamp guard to tell you all he knows, please hurry time is on the essence!");
+	action		AddNpcText( 34 , "You can find him in the swamp, north of the Stronghold.");
+
+	action		AddNpcText( 10 , "You're back!");
+	action		AddNpcText( 10 , "We are already trying to rescue him, it seem the little kid went on an adventure in one of the caves north of here!");
+
+	rule 		TalkedToNpc(10) goto GoHH
+}
+
+state GoHH
+{
+	desc		"Find cave, Stronghold swamp"
+	action		AddNpcText( 10 , "We can use all the help available. Please hurry to the cave!");
+	rule		EnterCoord( 41, 43 , 2) goto GotMap_Entry
+}
+
+state GotMap_Entry
+{
+	action		SetMap( 279, 7, 17)
+	rule		Always() goto GotCave
+}
+
+state GotCave
+{
+	desc		"Go down to save the kid!"
+	action		AddNpcText( 47 , "Ahh, there you are! Right on time. I prepared the ladder for you.");
+	action		AddNpcText( 47 , "Are you ready to go down there?");
+
+	action		AddNpcInput( 47 , 1 , "Wait a second..");
+	action		AddNpcInput( 47 , 2 , "Aye!");
+
+	rule 		InputNpc( 2 ) goto GotRescue_Entry
+	rule		EnterMap( 41 ) goto GoHH
+}
+
+state GotRescue_Entry
+{
+	action		SetMap( 280, 15, 10)
+	rule		Always() goto TalkToSon
+}
+
+state TalkToSon
+{
+	desc		"Talk to Pjedro's son"
+
+	action		AddNpcText( 12 , "I was bringing some vegtables to my aunt, but i must have taken the wrong turn.. And then i saw this cave..");
+	action		AddNpcText( 12 , "Im sorry i bene naughty *crying out loud* I will never do this again I promise!");
+	action		AddNpcText( 12 , "I really miss my daddy, please take me home..");
+
+	action		AddNpcInput( 12 , 1 , "Those man will bring you home.");
+	action		AddNpcInput( 12 , 2 , "You been very naughty!!");
+
+	rule 		InputNpc( 1 ) goto FinalTalk_Entry
+	rule		EnterMap( 41 ) goto GoHH
+}
+
+state FinalTalk_Entry
+{
+	action		SetMap( 41, 44, 3)
+	rule		Always() goto FinalTalk
+}
+
+state FinalTalk
+{
+	desc		"Talk to Pjedro"
+	action		SetMap(240,10,7)
+
+	action		AddNpcText( 1 , "Im going to bring him to bed he is so tired.. Thank you so much for bringing our boy back!!" );
+	action		AddNpcText( 3 , "Thank you so much for bringing him back!");
+	action		AddNpcChat( 1 , "Thank you!" );
+	action		AddNpcChat( 3 , "Thank you!" );
+
+	rule 		TalkedToNpc(1) goto GetReward
+}
+
+state GetReward
+{
+	action		GiveExp(12600);
+	action		ShowHint("You gained 12600 EXP!")
+	action		PlaySound(18)
+
+	End()
+}	

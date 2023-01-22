@@ -1,0 +1,65 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"PeriPeri (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Go to the periperi farm"
+	action		AddNpcChat( 23 , "Hellow stranger" );
+	action		AddNpcText( 23 , "Oh my, since those angry moles appeared our harvest is wasted.." );
+	action		AddNpcText( 23 , "Would you be so kind to stop those moles for me?" );
+
+	action		AddNpcInput( 23 , 1 , "Not intrested");
+	action		AddNpcInput( 23 , 2 , "I will help you");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto KillMoles
+
+}
+
+state KillMoles
+{
+	desc		"Kill 50 moles"
+	action		ShowHint("Quest reward: 3100 EXP (REP)")
+	action		AddNpcText( 23 , "Please kill 50 moles for me and I will reward you with experience!");
+
+	action		AddNpcInput( 23 , 1 , "Sorry, i give up.");
+	action		AddNpcInput( 23 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 241, 50) goto Talk2
+}
+
+state Talk2
+{
+	desc		"Talk to PeriPeri farmer"
+	action		ShowHint("Go to periperi for a reward!)
+	action		AddNpcChat( 23 , "Thank you so much,!" );
+	action		AddNpcText( 23 , "Thank you so much, I can see you worked hard.. Please accept my humble reward." );
+
+	rule 		TalkedToNpc( 23 ) goto GetReward // requires to talk
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 3100 EXP!");
+	action		PlaySound(17);
+
+	action		GiveExp(3100)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Maybe another time..")
+	action		Reset() // reset and abort quest
+}	

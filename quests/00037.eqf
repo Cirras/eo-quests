@@ -1,0 +1,81 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Peasant Courier (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Talk to the peasant woman"
+	action		ShowHint("Quest reward : 190 EXP (REP)")
+	action		AddNpcText( 37 , "Hi stranger, i really need some help.." );
+	action		AddNpcText( 37 , "I couldn't take it anymore. The rats invaded our farm and I ran away to this small shed." );
+	action		AddNpcText( 37 , "Can you bring some bread to my husband, i fear he might not eat well while im gone." );
+
+	action		AddNpcInput( 37 , 1 , "No thanks");
+	action		AddNpcInput( 37 , 2 , "I will bring it to him.");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Talk1
+}
+
+state Begin2
+{
+	desc		"New bread from peasant woman"
+	action		ShowHint("Ohno! you lost the bread..")
+	action		AddNpcText( 37 , "Hmm, you lost the bread?" );
+	rule		TalkedToNpc( 37 ) goto Talk1
+
+}
+
+state Talk1
+{
+	desc		"Bring the bread to farmer Jorge"
+	action		ShowHint("Quest reward : 180 EXP (REP)")
+	action		AddNpcText( 37 , "Here take this bread, i just made it myself." );
+	action		AddNpcText( 37 , "Please bring it to my hustand, old farmer Jorge, so he can have a proper meal." );
+
+	action		AddNpcText( 35 , "A bread from my wife? I haven't eat properly since days, those rats are driving me crazy!" );
+
+	action		GiveItem( 485 , 1)
+
+	action		AddNpcInput( 37 , 1 , "Sorry, i changed my mind");
+	action		AddNpcInput( 37 , 2 , "Okay.");
+
+	rule		TalkedToNpc( 35 ) goto TakeBread
+	rule		LostItems( 485 , 1 ) goto Begin2
+	rule 		InputNpc( 1 ) goto Reset
+}
+
+state TakeBread
+{
+	desc		"Report to peasant woman"
+	action		RemoveItem( 485 , 10)	
+	action		AddNpcText( 35 , "Thank you very much, please tell my wife that I almost solved this little rat problem." );
+	action		AddNpcText( 37 , "So he didn't eat for days? I doubt he ever fix the problem!" );
+	action		AddNpcText( 37 , "Thank you for helping me, please accept my reward." );
+
+	rule		TalkedToNpc( 37 ) goto GetReward
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 190 EXP (REP)");
+	action		PlaySound(17);
+
+	action		GiveExp(190)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Bread courier quest aborted..")
+	action		Reset() // reset and abort quest
+}	

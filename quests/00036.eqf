@@ -1,0 +1,49 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Sheep Protector (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Kill 5 Snakes"
+	action		ShowHint("Quest reward : 210 EXP (REP)")
+	action		AddNpcText( 36 , "Its terrible, those ugly snakes are killing all my cattle." );
+	action		AddNpcText( 36 , "Im too old to fight. I wish someone could help me killing those snakes!" );
+
+	action		AddNpcInput( 36 , 1 , "No thanks");
+	action		AddNpcInput( 36 , 2 , "I help you!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 6, 5) goto Talk1
+}
+
+state Talk1
+{
+	desc		"Talk to old farmer Jerzy"
+	action		ShowHint("You have successfully killed 5 snakes!")
+	action		AddNpcChat( 36 , "Thank you!" );
+	action		AddNpcText( 36 , "Thank you! I hope my sheeps are safe for now.." );
+	rule		TalkedToNpc( 36 ) goto GetReward
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 210 EXP (REP)");
+	action		PlaySound(17);
+
+	action		GiveExp(210)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Sheep protector quest aborted..")
+	action		Reset() // reset and abort quest
+}	

@@ -1,0 +1,107 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Treasure Hunt"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to little Danny."
+	action		AddNpcText( 33 , "Im so bored! Why dont we go on a real treasure hunt together??" );
+	action		AddNpcText( 33 , "I have hidden 3 notes around the town, and you go find them! Come on its fun!" );
+	action		AddNpcText( 33 , "Ofcourse i will greatly reward you for finding my treasure!" );
+
+	rule 		TalkedToNpc( 33 ) goto Begin2 // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin2
+{
+	desc		"Find the first treasure"
+	action		ShowHint("Quest reward : 1200 EXP")
+	action		AddNpcText( 33 , "The first treasure clue is hidden somewhere north of the village with a lot of water.." );
+	action		AddNpcText( 33 , "I hidden my first clue under a pile of dirt very close to a waterfall, good luck pirate!!" );
+	action		AddNpcText( 33 , "Go find my first clue!" );
+
+	action		AddNpcInput( 33 , 1 , "Im not playing this silly game.");
+	action		AddNpcInput( 33 , 2 , "Aye aye!");
+
+	rule		EnterCoord( 196 , 31 , 11) goto Begin3
+	rule 		InputNpc( 1 ) goto Reset
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin3
+{
+	desc		"Find the second treasure"
+	action		ShowHint("You found the first clue!")
+	action		PlaySound(17);
+
+	action		AddNpcText( 33 , "Great you found the first clue, but i have another treasure that needs to be found!" );
+	action		AddNpcText( 33 , "This treasure is hidden under a pile of dirt very close to a biggg boat, lets get it!" );
+	action		AddNpcText( 33 , "Go find my second clue!" );
+
+	action		AddNpcInput( 33 , 1 , "Im not playing this silly game.");
+	action		AddNpcInput( 33 , 2 , "Aye aye!");
+
+	rule		EnterCoord( 195 , 37 , 10) goto Begin4
+	rule 		InputNpc( 1 ) goto Reset
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin4
+{
+	desc		"Find the last treasure"
+	action		ShowHint("You found the second clue!")
+	action		PlaySound(17);
+
+	action		AddNpcText( 33 , "Wow, you are really a good treasure hunter.. Hmm, I must make this more challenging for you." );
+	action		AddNpcText( 33 , "The last treasure is hidden under a pile of dirt in a land full of green slimy monsters! Eww!" );
+	action		AddNpcText( 33 , "If you can find my last treasure i will reward you with great experience!" );
+	action		AddNpcText( 33 , "Go find my last clue!" );
+
+	action		AddNpcInput( 33 , 1 , "Im not playing this silly game.");
+	action		AddNpcInput( 33 , 2 , "Aye aye!");
+
+	rule		EnterCoord( 197 , 14 , 37) goto Begin5
+	rule 		InputNpc( 1 ) goto Reset
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin5
+{
+	desc		"Talk to little Danny."
+	action		ShowHint("You found the last clue!")
+	action		PlaySound(17);
+
+	action		AddNpcText( 33 , "Wow, you found them all, you are a true pirate!" );
+	action		AddNpcText( 33 , "I had so much fun playing treasure hunt with you! Here is your great experience reward!" );
+
+	rule 		TalkedToNpc( 33 ) goto GetReward // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 1200 EXP and 5 health potions.");
+	action		PlaySound(17);
+	action		AddNpcChat( 33 , "Well done pirate!" );
+
+	action		GiveItem( 2 , 5)
+	action		GiveExp(1200)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Treasure hunt quest aborted..")
+	action		Reset() // reset and abort quest
+}	

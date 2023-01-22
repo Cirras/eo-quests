@@ -1,0 +1,66 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Funky Hair"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to guy inside shop."
+	action		AddNpcText( 31 , "I know, i know.. You are probably wondering why my hair looks so good." );
+	action		AddNpcText( 31 , "To be honest it was always troublesome to get it in shape, but im willing to share my secret.." );
+	action		AddNpcText( 31 , "I'm rubbing my hair twice a day with this wonderful green stuff.. But unfortunately i don't know where to find it." );
+	action		AddNpcText( 31 , "Could you look around to find it for me? You can pickup any item on the ground by clicking on it." );
+
+	rule 		TalkedToNpc( 31 ) goto Begin2 // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin2
+{
+	desc		"Collect 5 blob slime"
+	action		ShowHint("Quest reward : 800 EXP")
+	action		AddNpcText( 31 , "I pay ANYTHING for a 3 days supply of that green stuff, could you find it for me?" );
+
+	action		AddNpcInput( 31 , 1 , "No thanks");
+	action		AddNpcInput( 31 , 2 , "Sure");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 250 , 3 ) goto Talk2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk2
+{
+	desc		"Talk to guy inside shop."
+	action		ShowHint("You succesfully collected 10 blob slime")
+	action		AddNpcText( 31 , "You found a 3 day supply of green hair stuff! Please take this reward for your efforts." );
+
+	rule 		TalkedToNpc( 31 ) goto GetReward // requires to talk
+	rule		LostItems( 250 , 3 ) goto Begin2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 800 EXP and 100 gold.");
+	action		PlaySound(17);
+
+	action		RemoveItem( 250 , 3 )
+	action		GiveExp(800)
+	action		GiveItem( 1 , 100)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Goat collector quest aborted..")
+	action		Reset() // reset and abort quest
+}	

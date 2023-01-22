@@ -1,0 +1,59 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Snake Hunt (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Kill 3 snakes."
+	action		ShowHint("Quest reward : 66 EXP and 20 gold (REP)")
+	action		AddNpcText( 49 , "Hi im hunting some snakes, would you like to join me?" );
+	action		AddNpcText( 49 , "As you can see there is (rep) behind my name, this means that you can do this quest as many times as you like." );
+	action		AddNpcText( 49 , "You will find a lot more (rep) quests all over the world, however keep in mind that you can only have 10 active quests at a time!" );
+	action		AddNpcText( 49 , "Once your questbook is full, you need to abort an active quest to be able to take a new quest. Click on the Q button in the upper left corner to find out." );
+	action		AddNpcText( 49 , "Are you ready to hunt 3 snakes?" );
+
+	action		AddNpcInput( 49 , 1 , "No abort");
+	action		AddNpcInput( 49 , 2 , "Yes!");
+
+	rule 		KilledNpcs( 6, 3) goto Talk1
+	rule 		InputNpc( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk1
+{
+	desc		"Talk to the snake hunter"
+	action		ShowHint("You have successfully killed 3 snakes!")
+	action		AddNpcChat( 49 , "Great!" );
+	action		AddNpcText( 49 , "Great you killed 10 snakes, snake hunting is fun isnt it, i cannot get enough!" );
+	action		AddNpcText( 49 , "Unlike normal quests you can redo a (rep) quests as many times as you like, just talk to me again when you are ready for some more hunting." );
+	action		AddNpcText( 49 , "Remember that you can only have 10 active quests at a time, you can find out about you quests by clicking on the Q button in the upper left corner." );
+	action		AddNpcText( 49 , "Ok, here is your reward, 20 gold and 66 exp. Many thanks for your aid." );
+
+	rule		EnterMap( 5 ) goto Reset
+	rule		TalkedToNpc( 49 ) goto GetReward
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 66 EXP and 20 gold (REP)");
+	action		PlaySound(17);
+
+	action		GiveExp(66)
+	action		GiveItem(1,25)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("snake hunt quest aborted..")
+	action		Reset() // reset and abort quest
+}	

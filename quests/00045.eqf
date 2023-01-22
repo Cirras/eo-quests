@@ -1,0 +1,69 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Candy's Potion (daily)"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to Candy, Aeven."
+	action		AddNpcText( 45 , "Hi i'm Candy, the new apprentice of Aeven's mighty witch." );
+
+	rule 		TalkedToNpc( 45 ) goto Begin2 // requires to talk
+}
+
+state Begin2
+{
+	desc		"Collect 5 snake tooth"
+	action		ShowHint("Quest reward : 1100 EXP")
+	action		AddNpcText( 45 , "I can't complete my magic potion because im short of snake tooth, im just not powerfull enough to hunt them myself.." );
+	action		AddNpcText( 45 , "If you can hunt 5 snake tooth I will teach you some tricks i learned (1100 exp)" );
+
+	action		AddNpcInput( 45 , 1 , "No time!");
+	action		AddNpcInput( 45 , 2 , "Im working on it!");
+
+	rule		DoneDaily( 1 ) goto EndWithoutReset // once a day ( 1 )
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 253 , 5 ) goto Talk2
+}
+
+state Talk2
+{
+	desc		"Talk to Candy, Aeven."
+	action		ShowHint("You succesfully collected 12 crow claws horns")
+	action		AddNpcChat( 45 , "New supplies!" );
+	action		AddNpcText( 45 , "Ah! i see you found the 5 snake tooth for me already, thanks now i can complete the magic potion.");
+
+	rule 		TalkedToNpc( 45 ) goto GetReward // requires to talk
+	rule		LostItems( 253 , 5 ) goto Begin2
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 1100 EXP (DAILY)");
+	action		PlaySound(17);
+
+	action		RemoveItem( 253 , 5 )
+	action		GiveExp(1100)
+	action		ResetDaily();
+}
+
+state EndWithoutReset
+{
+	desc		"Talk to Candy, Aeven."
+	action		ShowHint("You can only complete this quest once a day.");
+	action		AddNpcText( 45 , "Thank you so much for collecting those final ingredients for my potion. I dont need more snake tooth at the moment!" );
+	action		AddNpcText( 45 , "Maybe you should go see my sister Ayla, she is always looking for some rat tails! You can find her inside the witch mansion, located east of Aeven." );
+	action		AddNpcText( 45 , "[ you cannot complete this quest today , please come back tomorrow ]" );
+	rule 		TalkedToNpc( 45 ) goto Reset // requires to talk	
+}
+
+state Reset
+{
+	action		ShowHint("Snake Antidote quest aborted..")
+	action		Reset(); // reset and abort quest
+}	

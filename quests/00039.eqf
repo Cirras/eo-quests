@@ -1,0 +1,128 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Aeven Sewers"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to Drunk engineer, Aeven pub"
+	action		AddNpcText( 39 , "im toow *hic* druwnk, why diwd i drink on the fiuwrst day *hic* owf my *hic* nejw jowb.." );
+	action		AddNpcText( 39 , "thej sewejr iws going to flood becausj noone is pressing thej *hic* butownss.." );
+
+	action		AddNpcInput( 39 , 1 , "Whatever");
+	action		AddNpcInput( 39 , 2 , "Buttons?");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Begin2
+}
+
+state Begin2
+{
+	desc		"Talk to Drunk engineer, Aeven pub"
+	action		ShowHint("Quest reward : 6100 EXP")
+	action		AddNpcText( 39 , "YYejs.. the *hic* buwttons.." );
+	action		AddNpcText( 39 , "I ajm suwpppppose *hic* to presss thejjmm *hic* buwt iuw cajnot wajlk.." );
+	action		AddNpcText( 39 , "Sowmeone need to *hic* save us.." );
+
+	action		AddNpcInput( 39 , 1 , "You are crazy");
+	action		AddNpcInput( 39 , 2 , "I can help you");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Begin3
+}
+
+state Begin3
+{
+	desc		"Power off control unit #2"
+	action		ShowHint("You realized how dangerous the situation has become..")
+	action		PlaySound(17);
+
+	action		AddNpcText( 39 , "GGreeeat *hic* plleasj look at thiwss instruwctiuowwn nowte.." );
+	action		AddNpcText( 39 , "[ You opened the instruction note of the drunken sewer engineer ]" );
+	action		AddNpcText( 39 , "[ Daily routine to prevent flooding the sewer ]" );
+	action		AddNpcText( 39 , "[ Press first on the control button of sewer control unit #2 ]" );
+	action		AddNpcText( 39 , "[ Press secondly on the control button of sewer control unit #1 ]" );
+	action		AddNpcText( 39 , "[ Finally press on the control button of sewer control unit #3 ]" );
+	action		AddNpcText( 39 , "[ For our new workers - the control units are located at the center of the sewer ]" );
+	action		AddNpcText( 39 , "Pleeajs help me?" );
+
+	action		AddNpcInput( 39 , 1 , "No thanks");
+	action		AddNpcInput( 39 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule		EnterCoord( 18 , 51 , 51) goto Begin4
+}
+
+state Begin4
+{
+	desc		"Power off control unit #1"
+	action		ShowHint("Control Unit #2 stabilized!")
+	action		PlaySound(17);
+	action		AddNpcText( 39 , "GGreeeat *hic* plleasj look at thiwss instruwctiuowwn nowte.." );
+	action		AddNpcText( 39 , "[ You opened the instruction note of the drunken sewer engineer ]" );
+	action		AddNpcText( 39 , "[ Daily routine to prevent flooding the sewer ]" );
+	action		AddNpcText( 39 , "[ Press first on the control button of sewer control unit #2 ]" );
+	action		AddNpcText( 39 , "[ Press secondly on the control button of sewer control unit #1 ]" );
+	action		AddNpcText( 39 , "[ Finally press on the control button of sewer control unit #3 ]" );
+	action		AddNpcText( 39 , "[ For our new workers - the control units are located at the center of the sewer ]" );
+	action		AddNpcText( 39 , "Pleeajs help me?" );
+
+	action		AddNpcInput( 39 , 1 , "No thanks");
+	action		AddNpcInput( 39 , 2 , "Im working on it!");
+
+	rule		EnterCoord( 18 , 49 , 57) goto Begin5
+	rule 		InputNpc( 1 ) goto Reset
+}
+
+state Begin5
+{
+	desc		"Power off control unit #3"
+	action		ShowHint("Control Unit #1 stabilized!")
+	action		PlaySound(17);
+	action		AddNpcText( 39 , "GGreeeat *hic* plleasj look at thiwss instruwctiuowwn nowte.." );
+	action		AddNpcText( 39 , "[ You opened the instruction note of the drunken sewer engineer ]" );
+	action		AddNpcText( 39 , "[ Daily routine to prevent flooding the sewer ]" );
+	action		AddNpcText( 39 , "[ Press first on the control button of sewer control unit #2 ]" );
+	action		AddNpcText( 39 , "[ Press secondly on the control button of sewer control unit #1 ]" );
+	action		AddNpcText( 39 , "[ Finally press on the control button of sewer control unit #3 ]" );
+	action		AddNpcText( 39 , "[ For our new workers - the control units are located at the center of the sewer ]" );
+	action		AddNpcText( 39 , "Pleeajs help me?" );
+
+	action		AddNpcInput( 39 , 1 , "No thanks");
+	action		AddNpcInput( 39 , 2 , "Im working on it!");
+
+	rule		EnterCoord( 18 , 57 , 53) goto Begin6
+	rule 		InputNpc( 1 ) goto Reset
+}
+
+state Begin6
+{
+	desc		"Report to Drunk engineer at pub"
+	action		ShowHint("Control Unit #3 stabilized!")
+	action		PlaySound(17);
+
+	action		AddNpcText( 39 , "Thajnk yo sow muwch *hic* youw ajre aj heroww" );
+	action		AddNpcText( 39 , "Now i neejd *hic* a drink.." );
+
+	rule 		TalkedToNpc( 39 ) goto GetReward // requires to talk
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 6100 EXP and a bottle of fairy soda!");
+	action		PlaySound(17);
+
+	action		GiveExp(6100)
+	action		GiveItem(211, 1)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Sewer repairs quest aborted..")
+	action		Reset() // reset and abort quest
+}	

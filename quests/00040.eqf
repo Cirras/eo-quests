@@ -1,0 +1,52 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Bird Control (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Kill 10 crows, Aeven"
+	action		ShowHint("Quest reward : 360 EXP and 50 gold (REP)")
+	action		AddNpcText( 40 , "Ordered by the mayor of Aeven himself, we are here to deal with the rapidly growing crow population." );
+	action		AddNpcText( 40 , "Although we don't like killing the birds, there is no other way.." );
+	action		AddNpcText( 40 , "Are you interested in a hunting job? We reward all citizens who kill 10 crows." );
+
+	action		AddNpcInput( 40 , 1 , "No thanks");
+	action		AddNpcInput( 40 , 2 , "Yes");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 1, 10) goto Talk1
+}
+
+state Talk1
+{
+	desc		"Talk to Jacob, Aeven"
+	action		ShowHint("You have successfully killed 10 crows!")
+	action		AddNpcChat( 40 , "Thank you for your aid!" );
+	action		AddNpcText( 40 , "Thank you for your aid!" );
+	action		AddNpcText( 40 , "Hmm, it looks like the crows keep coming from nowhere.. Feel free to join us any time!" );
+	rule		TalkedToNpc( 40 ) goto GetReward
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 360 EXP and 50 gold (REP)");
+	action		PlaySound(17);
+
+	action		GiveExp(360)
+	action		GiveItem(1,50)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Bird control quest aborted..")
+	action		Reset() // reset and abort quest
+}	

@@ -1,0 +1,67 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Susan's Quest (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Go to susan in the swamps"
+	action		AddNpcChat( 25 , "Hi!" );
+	action		AddNpcText( 25 , "Oh hi.. didnt notive you I am so busy.." );
+	action		AddNpcText( 25 , "I used to be a priestess in this temple, but since the tenba cursed our temple I couldnt bare to watch the temple just die.." );
+	action		AddNpcText( 25 , "I bought this warrior equipment in Aeven and started to battle the Tenba, so this temple can hopefully become normal again." );
+	action		AddNpcText( 25 , "You look quite strong, would you be willing to help me fight the tenba?" );
+
+	action		AddNpcInput( 25 , 1 , "Not intrested");
+	action		AddNpcInput( 25 , 2 , "I will help you");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto KillMoles
+
+}
+
+state KillMoles
+{
+	desc		"Kill 60 tenba"
+	action		ShowHint("Quest reward: 4500 EXP (REP)")
+	action		AddNpcText( 25 , "Please kill 60 evil swamp tenba's for me and I will reward you well!");
+
+	action		AddNpcInput( 25 , 1 , "Sorry, i give up.");
+	action		AddNpcInput( 25 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 232, 60) goto Talk2
+}
+
+state Talk2
+{
+	desc		"Talk to Susan"
+	action		ShowHint("Go to susan for a reward!)
+	action		AddNpcChat( 25 , "Thank you so much,!" );
+	action		AddNpcText( 25 , "Thank you so much *hug* here is a special reward for you!" );
+
+	rule 		TalkedToNpc( 25 ) goto GetReward // requires to talk
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 4500 EXP!");
+	action		PlaySound(17);
+
+	action		GiveExp(4500)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Not this time..")
+	action		Reset() // reset and abort quest
+}	

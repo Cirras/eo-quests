@@ -1,0 +1,55 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Slime Defender"
+	version		1
+}
+
+state Begin
+{
+	desc		"Kill 25 slime blobs"
+	action		ShowHint("Quest reward : 1000 EXP")
+	action		AddNpcText( 30 , "Noone knows what happened here but these slimey creatures ate all our goats!!" );
+	action		AddNpcText( 30 , "We need help to stop the creatures from reaching our village." );
+	action		AddNpcText( 30 , "To defeat the blobs one must properly be equiped with at least a DAGGER and some minimal armor." );
+	action		AddNpcText( 30 , "Please help us stop the blobs and I will reward you." );
+
+	action		AddNpcInput( 30 , 1 , "No thanks");
+	action		AddNpcInput( 30 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 3, 25) goto Talk2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk2
+{
+	desc		"Talk to defender."
+	action		ShowHint("You succesfully killed 25 blobs!")
+	action		AddNpcChat( 30 , "You saved our village!" );
+	action		AddNpcText( 30 , "Thank you for getting ride of these blob creatures, please accept my reward." );
+
+	rule 		TalkedToNpc( 30 ) goto GetReward // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 1000 EXP and 5 health potions!");
+	action		PlaySound(17);
+
+	action		GiveItem( 2 , 5)
+	action		GiveExp(1000)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Slime defender quest aborted..")
+	action		Reset() // reset and abort quest
+}	

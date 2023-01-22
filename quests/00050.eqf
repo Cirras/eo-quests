@@ -1,0 +1,75 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Fox fur (daily)"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk to Ash or Boum."
+	action		AddNpcText( 50 , "Hi stranger! Im on a fox hunt together with my brother, to impove our chances we have split up to hunt east and west of Aeven." );
+	action		AddNpcText( 50 , "We can use some help.." );
+
+	action		AddNpcInput( 50 , 1 , "Forget it");
+	action		AddNpcInput( 50 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Begin2
+}
+
+state Begin2
+{
+	desc		"Collect 15 fox fur"
+	action		ShowHint("Quest reward : 3120 EXP and 240 gold")
+	action		AddNpcText( 50 , "We a trying to craft a magical fox fur coat but hunting 15 fox fur is pretty difficult." );
+	action		AddNpcText( 50 , "Hmm, how about we pay you 3120 exp and 240 gold for the fur we need?" );
+
+	action		AddNpcInput( 50 , 1 , "Thats way too little");
+	action		AddNpcInput( 50 , 2 , "Ok, no problem!");
+
+	rule		DoneDaily( 1 ) goto EndWithoutReset // once a day ( 1 )
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 252 , 15 ) goto Talk2
+}
+
+state Talk2
+{
+	desc		"Talk to Ash or Boum."
+	action		ShowHint("You succesfully collected 15 fox fur horns")
+	action		AddNpcChat( 50 , "Fox fur!" );
+	action		AddNpcText( 50 , "Ahh, i see you have succeeded in hunting the fox fur!");
+	action		AddNpcText( 50 , "Thanks for hunting the fur for us, i will take it in and  inform my brother about your success.");
+
+	rule 		TalkedToNpc( 50 ) goto GetReward // requires to talk
+	rule		LostItems( 252 , 15 ) goto Begin2
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 3120 EXP and 240 gold (DAILY)");
+	action		PlaySound(17);
+
+	action		RemoveItem( 252 , 15 )
+	action		GiveItem( 1, 240)
+	action		GiveExp(3120)
+	action		ResetDaily();
+}
+
+state EndWithoutReset
+{
+	desc		"Talk to Ash or Boum."
+	action		ShowHint("You can only complete this quest once a day.");
+	action		AddNpcText( 50 , "Okay thats enough fox fur for today, me and my brother thank you for your help." );
+	action		AddNpcText( 50 , "[ you cannot complete this quest today , please come back tomorrow ]" );
+	rule 		TalkedToNpc( 50 ) goto Reset // requires to talk	
+}
+
+state Reset
+{
+	action		ShowHint("Snake Antidote quest aborted..")
+	action		Reset(); // reset and abort quest
+}	

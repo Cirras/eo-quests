@@ -1,0 +1,71 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Castle Hedgehogs (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Talk to the royal gardener"
+	action		ShowHint("Quest reward : 1060 EXP and 80 gold (REP)")
+	action		AddNpcText( 48 , "nice to meet you, let me introduce myself." );
+	action		AddNpcText( 48 , "Im the royal gardener, im hired by the king himself to keep the royal gardens in tip top shape." );
+	action		AddNpcText( 48 , "However i got problems.." );
+
+	action		AddNpcInput( 48 , 1 , "No thank you.");
+	action		AddNpcInput( 48 , 2 , "Let me hear..");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Begin1
+}
+
+
+state Begin1
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Kill 10 castle hedgehogs"
+	action		ShowHint("Quest reward : 1060 EXP and 100 gold (REP)")
+	action		AddNpcText( 48 , "Great.. Thank you for listening not many people do.." );
+	action		AddNpcText( 48 , "There are hedgehogs in my garden. So many that i don't know how to stop them." );
+	action		AddNpcText( 48 , "I would pay you 1060 exp and 80 gold for killing 10 hedgehogs." );
+
+	action		AddNpcInput( 48 , 1 , "No thanks");
+	action		AddNpcInput( 48 , 2 , "Okay, i'm on my way!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 288, 10) goto Talk1
+}
+
+state Talk1
+{
+	desc		"Talk to the royal gardener"
+	action		ShowHint("You have successfully killed 10 castle hedgehogs!")
+	action		AddNpcChat( 48 , "Thank you for your help." );
+	action		AddNpcText( 48 , "Thank you for your help." );
+	action		AddNpcText( 48 , "Thank you, feel free to help me again any time you like!" );
+	rule		TalkedToNpc( 48 ) goto GetReward
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 1060 EXP and 50 gold (REP)");
+	action		PlaySound(17);
+
+	action		GiveExp(1060)
+	action		GiveItem(1,80)
+	action		Reset()
+}
+
+state Reset
+{
+	action		ShowHint("Castle hedgehogs quest aborted..")
+	action		Reset() // reset and abort quest
+}	

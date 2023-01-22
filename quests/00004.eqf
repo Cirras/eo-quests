@@ -1,0 +1,113 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Karma Quest (rep)"
+	version		1
+}
+
+state Begin
+{
+			// begin states only contains npctext or input, so the quest can only
+			// be triggered by talking to a NPC
+
+	desc		"Talk to Wise Man"
+	action		AddNpcChat( 4 , "Hellow stranger" );
+	action		AddNpcText( 4 , "Hellow stranger, what can i do for you" );
+	action		AddNpcInput( 4 , 1 , "Karma menu");
+	action		AddNpcInput( 4 , 2 , "Class menu");
+
+	rule 		InputNpc( 1 ) goto Karma
+	rule 		InputNpc( 2 ) goto Class
+}
+
+state Karma
+{
+	desc		"Talk to Wise Man"
+	action		ShowHint("Karma menu opened");
+
+	action		AddNpcText( 4 , "What shall i do to your karma?" );
+	action		AddNpcInput( 4 , 1 , "Take 10 Karma");
+	action		AddNpcInput( 4 , 2 , "Take 100 Karma");
+	action		AddNpcInput( 4 , 3 , "Give 10 Karma");
+	action		AddNpcInput( 4 , 4 , "Give 100 Karma");
+
+	rule 		InputNpc( 1 ) goto Take10
+	rule 		InputNpc( 2 ) goto Take100
+	rule 		InputNpc( 3 ) goto Give10
+	rule 		InputNpc( 4 ) goto Give100
+}
+
+state Class
+{
+	desc		"Talk to Wise Man"
+	action		ShowHint("Class menu opened");
+
+	action		AddNpcText( 4 , "This is a temporary menu to set your class thru the quest-engine, will be better later on." );
+	action		AddNpcInput( 4 , 1 , "Make me Priest");
+	action		AddNpcInput( 4 , 2 , "Make me Magician");
+	action		AddNpcInput( 4 , 3 , "Make me Rogue");
+	action		AddNpcInput( 4 , 4 , "Make me Archer");
+	action		AddNpcInput( 4 , 5 , "Make me Warrior");
+
+	rule 		InputNpc( 1 ) goto Priest
+	rule 		InputNpc( 2 ) goto Magician
+	rule 		InputNpc( 3 ) goto Rogue
+	rule 		InputNpc( 4 ) goto Archer
+	rule 		InputNpc( 5 ) goto Warrior
+}
+
+state Priest
+{
+	action		SetClass(2)
+	Reset()
+}
+
+state Magician
+{
+	action		SetClass(3)
+	Reset()
+}
+
+state Rogue
+{
+	action		SetClass(4)
+	Reset()
+}
+
+state Archer
+{
+	action		SetClass(5)
+	Reset()
+}
+
+state Warrior
+{
+	action		SetClass(6)
+	Reset()
+}
+
+state Take10
+{
+	action		RemoveKarma(10);
+	action		Reset();
+}
+
+state Take100
+{
+	action		RemoveKarma(100);
+	action		Reset();
+}
+
+state Give10
+{
+	action		GiveKarma(10);
+	action		Reset();
+}
+
+state Give100
+{
+	action		GiveKarma(100);
+	action		Reset();
+}

@@ -1,0 +1,79 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Boots For Diner"
+	version		1
+}
+
+state Begin
+{
+	desc		"Talk with the captain."
+	action		AddNpcText( 34 , "I hate my job.." );
+	action		AddNpcText( 34 , "Aeven's finest captain, and where do they send me? On guard.." );
+
+	action		AddNpcInput( 34 , 1 , "Ya.. whatever");
+	action		AddNpcInput( 34 , 2 , "Its a shame!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Begin1
+}
+
+state Begin1
+{
+	desc		"Talk with the captain."
+	action		AddNpcText( 34 , "Finally someone that recognize my skills!" );
+	action		AddNpcText( 34 , "I should be fighting wars, not standing here.." );
+	action		AddNpcText( 34 , "I hate my job.." );
+	action		AddNpcText( 34 , "And top of that those dam sheep ate my shoes" );
+	action		AddNpcText( 34 , "I hate my job.." );
+
+	action		AddNpcInput( 34 , 1 , "Bye!");
+	action		AddNpcInput( 34 , 2 , "I help you");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		InputNpc( 2 ) goto Begin2
+}
+
+state Begin2
+{
+	desc		"Find the captains boots"
+	action		ShowHint("Quest reward : 2200 EXP")
+	action		AddNpcText( 34 , "Please find my boots, the sheeps ate it!" );
+
+	action		AddNpcInput( 34 , 1 , "No thanks");
+	action		AddNpcInput( 34 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 484 , 1 ) goto Talk2
+}
+
+state Talk2
+{
+	desc		"Give the boots to the captain."
+	action		ShowHint("You succesfully collected the captain boots")
+	action		AddNpcChat( 34 , "My boots! My boots!" );
+	action		AddNpcText( 34 , "Thanks for bringing me back my boots. As promised, please accept my reward." );
+
+	rule 		TalkedToNpc( 34 ) goto GetReward // requires to talk
+	rule		LostItems( 484 , 1 ) goto Begin2
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 2200 EXP and 4 health potions!");
+	action		PlaySound(17);
+
+	action		RemoveItem( 258 , 6 )
+	action		GiveItem( 2 , 4)
+	action		GiveExp(2200)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Quest Boots For Diner aborted..")
+	action		Reset() // reset and abort quest
+}	

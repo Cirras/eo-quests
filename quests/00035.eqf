@@ -1,0 +1,87 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Rat Problems"
+	version		1
+}
+
+state Begin
+{
+	desc		"Kill the rat, inside old farm"
+	action		ShowHint("Quest reward : 1710 EXP")
+	action		AddNpcText( 35 , "There must be a rat inside my house, there holes in my bags of grain everywhere.." );
+	action		AddNpcText( 35 , "Can you find and kill this critter for me?" );
+
+	action		AddNpcInput( 35 , 1 , "No thanks");
+	action		AddNpcInput( 35 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		KilledNpcs( 2, 1) goto Talk2
+
+}
+
+state Talk2
+{
+	desc		"Talk to the old farmer"
+	action		ShowHint("You succesfully killed the rat!")
+	action		AddNpcChat( 35 , "Thank you!" );
+	action		AddNpcText( 35 , "Thank you for removing that rat!" );
+	action		AddNpcText( 35 , "Actually my basement is crowded with fierce rats and my wife doesnt want to live here anymore." );
+	action		AddNpcText( 35 , "Please kill all rats in my basement and i will reward you for your efforts." );
+	action		AddNpcText( 35 , "You can enter the basement on the upperright corner of my house, i just unlocked the door for you." );
+
+	action		AddNpcInput( 35 , 1 , "No thanks");
+	action		AddNpcInput( 35 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule		EnterCoord( 3 , 0 , 3) goto KillBasement
+}
+
+state KillBasement
+{
+	desc		"Kill 20 fierce rat."
+	action		SetMap( 278, 3, 2)
+
+	rule 		KilledNpcs( 270, 20) goto Talk3
+	rule		EnterMap( 3 ) goto Talk4
+
+}
+
+state Talk4
+{
+	desc		"Talk to the old farmer"
+	action		ShowHint("Talk to the old farmer")
+	action		AddNpcChat( 35 , "Oh no.." );
+	action		AddNpcText( 35 , "My basement is still full of rats, my wife is going to leave me now, try harder next time." );
+
+	rule 		TalkedToNpc( 35 ) goto Reset
+
+}
+
+state Talk3
+{
+	desc		"Talk to the old farmer"
+	action		ShowHint("You succesfully killed 20 fierce rats!")
+	action		AddNpcChat( 35 , "Thank you so much for killing those rats!" );
+	action		AddNpcText( 35 , "Thank you so much for killing those rats! My wife and I are very happy now! Here is your reward" );
+
+	rule 		TalkedToNpc( 35 ) goto GetReward // requires to talk
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 1710 EXP!");
+	action		PlaySound(17);
+
+	action		GiveExp(1710)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Rat problems quest aborted..")
+	action		Reset() // reset and abort quest
+}	

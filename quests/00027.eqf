@@ -1,0 +1,66 @@
+// QUest Engine 0.01 example script by VUlt-r
+// script shows how to initialize and begin the quest
+
+Main
+{
+	questname 	"Cave Research"
+	version		1
+}
+
+state Begin
+{
+	desc		"Collect 5 bat wings"
+	action		AddNpcText( 27 , "I was send here to do bat research but im too scared to go in that dark cave!" );
+	action		AddNpcText( 27 , "Rumors are that these bats inside are quite fast and tough! You probably need a SWORD." );
+	action		AddNpcText( 27 , "Cyndi, the shop owner in village, is crafting SWORDS in exchange for certain items dropped by snakes." );
+
+	rule 		TalkedToNpc( 27 ) goto Begin2 // requires to talk
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Begin2
+{
+	desc		"Collect 5 bat wings"
+	action		ShowHint("Quest reward : 1400 EXP, 100 gold")
+	action		AddNpcText( 27 , "You look really brave. Could you collect 5 bat wings for me?" );
+
+	action		AddNpcInput( 27 , 1 , "Sorry, i give up.");
+	action		AddNpcInput( 27 , 2 , "Im working on it!");
+
+	rule 		InputNpc( 1 ) goto Reset
+	rule 		GotItems( 319 , 5 ) goto Talk2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+}
+
+state Talk2
+{
+	desc		"Talk to the cave researcher."
+	action		ShowHint("You succesfully collected 5 bat wings.")
+	action		AddNpcChat( 27 , "Thank you so much, you save the day!" );
+	action		AddNpcText( 27 , "Thank you so much, these wings are wonderful for my research." );
+
+	rule 		TalkedToNpc( 27 ) goto GetReward // requires to talk
+	rule		LostItems( 319 , 5 ) goto Begin2
+	rule		EnterMap( 1 ) goto Reset
+	rule		EnterMap( 5 ) goto Reset
+
+}
+
+state GetReward
+{
+	action		ShowHint("You gained 1400 EXP and 100 gold!");
+	action		PlaySound(17);
+
+	action		RemoveItem( 319 , 5 )
+	action		GiveExp(1400)
+	action		GiveItem( 1 , 100)
+	action		End();
+}
+
+state Reset
+{
+	action		ShowHint("Cave research cave aborted..")
+	action		Reset() // reset and abort quest
+}	

@@ -6,6 +6,8 @@ The files are distributed here with permission from the author, Vult-r.
 
 ## Changes
 
+- Fixed logic issues
+  - Invalid `goto` states
 - Fixed syntax issues
   - Unterminated strings
   - Missing `action` keywords
